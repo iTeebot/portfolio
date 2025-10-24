@@ -1,0 +1,8 @@
+# robots.txt for Teebot - https://iteebot.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://iteebot.com/sitemap.xml
+
