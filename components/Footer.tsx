@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Github, Linkedin, Facebook, ArrowRight } from "lucide-react";
+import { Github, Linkedin, Facebook, Instagram, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -209,6 +209,15 @@ export default function Footer() {
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/iteebot/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-zinc-800 dark:bg-zinc-900 flex items-center justify-center hover:bg-white hover:text-zinc-900 transition-all"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>
