@@ -1,143 +1,180 @@
 # Teebot - Technology Consultancy Portfolio
 
-A modern, SEO-optimized single-page portfolio website for Teebot, showcasing our four core divisions: Consulting, Labs, Systems, and Studio.
+A premium, professional portfolio website for Teebot, showcasing our four core divisions with sophisticated design and functional contact capabilities.
 
-## 🚀 Features
+## ✨ Features
 
-- ✅ **Next.js 14** with App Router
+- ✅ **Premium Design** - Clean, sophisticated aesthetic with professional typography
+- ✅ **Next.js 16** with App Router and Turbopack
 - ✅ **TypeScript** for type safety
 - ✅ **Tailwind CSS 4** for modern styling
+- ✅ **Functional Contact Form** - With email delivery via Resend API
+- ✅ **Newsletter Subscription** - Built-in audience building
+- ✅ **Rate Limiting & Security** - Bot protection and spam prevention
 - ✅ **SEO Optimized** with comprehensive metadata
-- ✅ **Responsive Design** - works on all devices
-- ✅ **Smooth Scrolling** navigation
-- ✅ **Beautiful Animations** - gradient blobs, fade-ins
+- ✅ **Responsive Design** - Works beautifully on all devices
 - ✅ **Dark Mode** support
-- ✅ **Production Ready** - error-free and optimized
+- ✅ **Production Ready** - Thoroughly tested and optimized
 
-## 🎨 Sections
+## 🎨 Design Philosophy
 
-1. **Hero** - Eye-catching landing section with gradient animations
-2. **About** - Company mission, vision, and overview
-3. **Divisions** - Four specialized divisions with detailed features
-   - Teebot Consulting
-   - Teebot Labs
-   - Teebot Systems
-   - Teebot Studio
-4. **Contact** - Contact information and message form
-5. **Footer** - Site navigation and company info
+**Premium & Professional**
+- Playfair Display (serif) for elegant headings
+- Inter (sans-serif) for clean body text
+- Sophisticated color palette (black, white, refined grays)
+- No heavy gradients - just clean, timeless design
+- Asymmetric layouts for visual interest
 
-## 🛠️ Getting Started
+## 🚀 Quick Start
 
-### Prerequisites
-
-- Node.js 18+ installed
-- npm, yarn, or pnpm package manager
-
-### Installation
-
-1. Navigate to the project directory:
-```bash
-cd teebot-portfolio
-```
-
-2. Install dependencies:
+### 1. Install Dependencies
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
-### Development
+### 2. Configure Environment (Optional)
+Create `.env.local` for email functionality:
+```bash
+RESEND_API_KEY=your_resend_api_key
+RESEND_FROM_EMAIL=hello@iteebot.com
+```
 
-Run the development server:
-
+### 3. Run Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) 🎉
 
-### Build for Production
-
+### 4. Build for Production
 ```bash
 npm run build
-npm run start
+npm start
 ```
 
-## 📁 Project Structure
+## 📚 Documentation
+
+All documentation is organized in the [`docs/`](./docs) folder:
+
+- **[Getting Started](./docs/START-HERE.md)** - Start here for project introduction
+- **[Configuration Guide](./docs/ENV-CONFIGURATION.md)** - Email and security setup
+- **[Testing Guide](./docs/TESTING-GUIDE.md)** - How to test all features
+- **[Redesign Summary](./docs/REDESIGN-SUMMARY.md)** - Complete list of changes
+- **[Deployment](./docs/DEPLOYMENT.md)** - How to deploy to production
+
+👉 **See [docs/README.md](./docs/README.md) for the complete documentation index**
+
+## 🏗️ Project Structure
 
 ```
 teebot-portfolio/
 ├── app/
-│   ├── layout.tsx          # Root layout with SEO metadata
-│   ├── page.tsx            # Main page component
-│   └── globals.css         # Global styles and animations
+│   ├── api/
+│   │   ├── contact/         # Contact form API endpoint
+│   │   └── newsletter/      # Newsletter subscription API
+│   ├── layout.tsx           # Root layout with fonts & metadata
+│   ├── page.tsx             # Main page
+│   └── globals.css          # Premium design system
 ├── components/
-│   ├── Navigation.tsx      # Sticky navigation bar
-│   ├── Hero.tsx           # Hero section with animations
-│   ├── About.tsx          # About section
-│   ├── Divisions.tsx      # Four divisions showcase
-│   ├── Contact.tsx        # Contact form and info
-│   └── Footer.tsx         # Footer component
-├── public/                 # Static assets
-└── package.json           # Dependencies and scripts
+│   ├── Hero.tsx             # Premium hero section
+│   ├── About.tsx            # Clean about section
+│   ├── Divisions.tsx        # Asymmetric divisions layout
+│   ├── Contact.tsx          # Functional contact form
+│   ├── Footer.tsx           # Footer with newsletter
+│   ├── Navigation.tsx       # Minimal navigation
+│   └── ScrollToTop.tsx      # Scroll to top button
+├── lib/
+│   └── utils/
+│       ├── rateLimit.ts     # Rate limiting logic
+│       └── validation.ts    # Input validation
+├── docs/                    # 📚 All documentation
+├── public/                  # Static assets
+└── README.md               # You are here!
 ```
 
-## 🎯 SEO Features
+## 🎯 Key Sections
 
-- Comprehensive metadata (title, description, keywords)
-- Open Graph tags for social sharing
-- Twitter Card support
-- Semantic HTML structure
-- Optimized for search engines
-- Mobile-friendly design
+1. **Hero** - Bold, minimal landing with elegant typography
+2. **About** - Mission, vision, and core specializations
+3. **Divisions** - Four specialized divisions (asymmetric layout)
+   - Teebot Consulting - Strategy & Architecture
+   - Teebot Labs - Research & Innovation (clickable link)
+   - Teebot Systems - Hardware & IoT
+   - Teebot Studio - Digital Experiences
+4. **Contact** - Functional form with real-time validation
+5. **Footer** - Newsletter subscription + social links
+
+## 🔒 Security Features
+
+- ✅ Rate limiting on all form submissions
+- ✅ Input validation and sanitization
+- ✅ XSS protection
+- ✅ Email validation
+- ✅ Bot protection infrastructure
+- ✅ CORS-ready for production
+
+## 📧 Email Configuration
+
+The site uses **Resend** for modern email delivery:
+
+1. Sign up at [resend.com](https://resend.com) (free tier available)
+2. Get your API key
+3. Add to `.env.local`:
+   ```bash
+   RESEND_API_KEY=re_xxxxxxxxxxxxx
+   RESEND_FROM_EMAIL=hello@iteebot.com
+   ```
+
+**Without configuration:** Forms will work but only log to console.
+
+See [ENV-CONFIGURATION.md](./docs/ENV-CONFIGURATION.md) for details.
+
+## 🎨 Customization
+
+### Colors & Branding
+- Edit CSS variables in `app/globals.css`
+- Customize color palette (currently: sophisticated neutrals)
+- Update logo in `public/logo.png`
+
+### Content
+- Edit components in `components/` folder
+- Update division details in `components/Divisions.tsx`
+- Modify metadata in `app/layout.tsx`
+
+### Fonts
+- Currently using: Playfair Display + Inter
+- Change in `app/layout.tsx` if desired
 
 ## 🌐 Deployment
 
 ### Vercel (Recommended)
+```bash
+# Deploy in one command
+vercel
+```
 
-1. Push your code to GitHub
-2. Import project to Vercel
-3. Deploy with one click
+Or connect your GitHub repo for automatic deployments.
+
+**Don't forget to add environment variables in Vercel dashboard!**
 
 ### Other Platforms
-
-This is a standard Next.js app and can be deployed to:
+Works with:
 - Netlify
-- AWS Amplify
+- AWS Amplify  
 - Docker
-- Any Node.js hosting platform
+- Any Node.js hosting
 
-## 🎨 Customization
+See [DEPLOYMENT.md](./docs/DEPLOYMENT.md) for detailed instructions.
 
-### Colors
+## 📦 Tech Stack
 
-The site uses a gradient color scheme (blue → purple → pink). To customize:
-- Edit Tailwind classes in components
-- Update CSS variables in `globals.css`
-
-### Content
-
-- Edit component content directly in `components/` folder
-- Update metadata in `app/layout.tsx`
-- Modify division details in `components/Divisions.tsx`
-
-## 📧 Contact Configuration
-
-To connect the contact form to a backend:
-
-1. Add form handling in `components/Contact.tsx`
-2. Use services like:
-   - Formspree
-   - EmailJS
-   - SendGrid
-   - Your own API endpoint
+- **Framework:** Next.js 16 (App Router, Turbopack)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **Animations:** Framer Motion
+- **Email:** Resend API
+- **Icons:** Lucide React
+- **Fonts:** Playfair Display + Inter (Google Fonts)
 
 ## 📝 License
 
@@ -145,8 +182,10 @@ This project is created for Teebot. All rights reserved.
 
 ## 🤝 Support
 
-For questions or support, contact: hello@iteebot.com
+- **Email:** hello@iteebot.com
+- **Website:** [iteebot.com](https://iteebot.com)
+- **Labs:** [labs.iteebot.com](https://labs.iteebot.com)
 
 ---
 
-Built with ❤️ by Teebot
+Built with precision and care by **Teebot** 🚀

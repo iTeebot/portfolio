@@ -22,94 +22,66 @@ export default function Navigation() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-md shadow-sm dark:bg-black/80"
+          ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-200 dark:border-zinc-800"
           : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] as const }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 md:h-24 w-full">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
           <motion.button
             onClick={() => scrollToSection("hero")}
-            className="relative flex-shrink-0 max-w-[60%]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="relative flex-shrink-0"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Image
               src="/logo.png"
               alt="Teebot"
-              width={200}
-              height={60}
-              className="h-10 md:h-16 w-auto object-contain"
+              width={180}
+              height={50}
+              className="h-12 w-auto object-contain dark:brightness-0 dark:invert"
               priority
             />
           </motion.button>
           
           {/* Desktop Navigation */}
-          <motion.div 
-            className="hidden md:flex space-x-8"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <motion.button
+          <div className="hidden md:flex items-center gap-8">
+            <button
               onClick={() => scrollToSection("about")}
-              className="text-gray-700 dark:text-gray-300 font-medium relative"
-              whileHover={{ scale: 1.1, color: "#2563eb" }}
-              whileTap={{ scale: 0.95 }}
+              className="text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               About
-              <motion.div
-                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
-            <motion.button
+            </button>
+            <button
               onClick={() => scrollToSection("divisions")}
-              className="text-gray-700 dark:text-gray-300 font-medium relative"
-              whileHover={{ scale: 1.1, color: "#2563eb" }}
-              whileTap={{ scale: 0.95 }}
+              className="text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
               Divisions
-              <motion.div
-                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
-            <motion.button
+            </button>
+            <button
               onClick={() => scrollToSection("contact")}
-              className="text-gray-700 dark:text-gray-300 font-medium relative"
-              whileHover={{ scale: 1.1, color: "#2563eb" }}
-              whileTap={{ scale: 0.95 }}
+              className="px-6 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
             >
               Contact
-              <motion.div
-                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden p-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex-shrink-0 min-w-[44px]"
+          <button
+            className="md:hidden p-2 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            whileTap={{ scale: 0.95 }}
+            aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait">
               {isMobileMenuOpen ? (
@@ -134,44 +106,38 @@ export default function Navigation() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.button>
+          </button>
         </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-black/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-lg"
+              className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-200 dark:border-zinc-800"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
               <div className="px-4 py-6 space-y-4">
-                <motion.button
+                <button
                   onClick={() => scrollToSection("about")}
-                  className="block w-full text-left text-lg font-medium text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="block w-full text-left text-lg font-medium text-zinc-700 dark:text-zinc-300 py-2"
                 >
                   About
-                </motion.button>
-                <motion.button
+                </button>
+                <button
                   onClick={() => scrollToSection("divisions")}
-                  className="block w-full text-left text-lg font-medium text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="block w-full text-left text-lg font-medium text-zinc-700 dark:text-zinc-300 py-2"
                 >
                   Divisions
-                </motion.button>
-                <motion.button
+                </button>
+                <button
                   onClick={() => scrollToSection("contact")}
-                  className="block w-full text-left text-lg font-medium text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  whileHover={{ x: 5 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="block w-full text-left text-lg font-medium text-zinc-700 dark:text-zinc-300 py-2"
                 >
                   Contact
-                </motion.button>
+                </button>
               </div>
             </motion.div>
           )}
@@ -180,4 +146,3 @@ export default function Navigation() {
     </motion.nav>
   );
 }
-
