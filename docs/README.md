@@ -11,6 +11,7 @@ Welcome to the Teebot portfolio documentation! This folder contains all project 
 
 ### **Design & Features**
 - **[REDESIGN-SUMMARY.md](./REDESIGN-SUMMARY.md)** - Complete redesign overview with all changes
+- **[MOBILE-OPTIMIZATIONS.md](./MOBILE-OPTIMIZATIONS.md)** - Mobile responsiveness improvements
 - **[VISUAL-GUIDE.md](./VISUAL-GUIDE.md)** - Visual design reference
 - **[DELIVERY-SUMMARY.md](./DELIVERY-SUMMARY.md)** - Project delivery notes
 

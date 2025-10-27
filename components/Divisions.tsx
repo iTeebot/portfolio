@@ -95,20 +95,20 @@ export default function Divisions() {
   };
 
   return (
-    <section id="divisions" className="py-32 bg-white dark:bg-zinc-950" ref={ref}>
+    <section id="divisions" className="py-16 sm:py-24 md:py-32 bg-white dark:bg-zinc-950" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-20"
+          className="max-w-3xl mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-serif font-bold text-zinc-900 dark:text-white mb-6 tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-zinc-900 dark:text-white mb-4 sm:mb-6 tracking-tight">
             Our Divisions
           </h2>
-          <div className="w-20 h-1 bg-zinc-900 dark:bg-white mb-8" />
-          <p className="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          <div className="w-16 sm:w-20 h-1 bg-zinc-900 dark:bg-white mb-6 sm:mb-8" />
+          <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
             Four specialized divisions working in harmony to deliver comprehensive technology solutions.
           </p>
         </motion.div>
@@ -133,7 +133,7 @@ export default function Divisions() {
                 `}
                 whileHover={{ y: -4 }}
               >
-                <div className={`p-8 ${division.size === 'large' ? 'md:p-12' : ''}`}>
+                <div className={`p-6 sm:p-8 ${division.size === 'large' ? 'md:p-10 lg:p-12' : ''}`}>
                   {/* Icon and Name */}
                   <div className="flex items-start justify-between mb-6">
                     <div>
