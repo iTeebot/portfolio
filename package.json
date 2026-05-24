@@ -6,26 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check-updates": "npx npm-check-updates -u"
   },
   "dependencies": {
-    "@types/nodemailer": "^7.0.3",
-    "framer-motion": "^12.23.24",
+    "@types/nodemailer": "^8.0.0",
+    "framer-motion": "^12.40.0",
     "lucide-react": "^0.546.0",
-    "next": "16.0.10",
-    "nodemailer": "^7.0.10",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "resend": "^6.2.2"
+    "next": "16.2.6",
+    "nodemailer": "^8.0.8",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "resend": "^6.12.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0",
+    "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "typescript": "^6"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
+  },
+  "packageManager": "npm@11.13.0"
 }
