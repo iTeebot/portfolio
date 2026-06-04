@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "labs.iteebot.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ateebnoone.iteebot.com",
+      },
     ],
   },
 };

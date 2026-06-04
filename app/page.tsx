@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import Projects3D from "@/components/Projects3D";
 import About from "@/components/About";
 import Divisions from "@/components/Divisions";
 import Contact from "@/components/Contact";
@@ -11,6 +12,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navigation />
       <Hero />
+      <Projects3D />
       <About />
       <Divisions />
       <Contact />
