@@ -27,17 +27,17 @@ export default function Navigation() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 z-50 mx-auto transition-all duration-500 ease-in-out ${
         isScrolled
-          ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-200 dark:border-zinc-800"
-          : "bg-transparent"
+          ? "top-4 w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-5xl rounded-full bg-white/80 dark:bg-zinc-950/80 backdrop-blur-lg border border-zinc-200/50 dark:border-zinc-800/50 shadow-lg shadow-zinc-200/10 dark:shadow-none"
+          : "top-0 w-full bg-transparent border-b border-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] as const }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className={`mx-auto transition-all duration-500 ${isScrolled ? "max-w-5xl px-6" : "max-w-7xl px-4 sm:px-6 lg:px-8"}`}>
+        <div className={`flex justify-between items-center transition-all duration-500 ${isScrolled ? "h-14" : "h-20"}`}>
           {/* Logo */}
           <motion.button
             onClick={() => scrollToSection("hero")}
@@ -50,7 +50,9 @@ export default function Navigation() {
               alt="Teebot"
               width={180}
               height={50}
-              className="h-12 w-auto object-contain dark:brightness-0 dark:invert"
+              className={`w-auto object-contain dark:brightness-0 dark:invert transition-all duration-500 ${
+                isScrolled ? "h-7" : "h-12"
+              }`}
               priority
             />
           </motion.button>
@@ -71,7 +73,9 @@ export default function Navigation() {
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-6 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
+              className={`rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all duration-500 ${
+                isScrolled ? "px-5 py-1.5" : "px-6 py-2"
+              }`}
             >
               Contact
             </button>
@@ -113,7 +117,11 @@ export default function Navigation() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-200 dark:border-zinc-800"
+              className={`md:hidden absolute top-full left-0 right-0 mt-2 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 ${
+                isScrolled
+                  ? "rounded-2xl shadow-lg mx-2"
+                  : "border-b border-x-0 border-t-0"
+              }`}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
