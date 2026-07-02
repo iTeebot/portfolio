@@ -146,11 +146,11 @@ export default function TinyXmlDetail() {
       {/* Back Button */}
       <div className="mb-8">
         <Link
-          href="/packages"
+          href="/"
           className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-          Back to Packages
+          Back to Home
         </Link>
       </div>
 

@@ -24,7 +24,7 @@ const projects: Project[] = [
     tags: ["Rust", "XML DOM", "FFI Compatibility", "Memory-Safe", "Zero Dependencies"],
     logo: "/tinyxml2-rs.png",
     github: "https://github.com/iTeebot/tinyxml2-rs",
-    details: "/packages/tinyxml2-rs",
+    details: "https://labs.iteebot.com/packages/tinyxml2-rs",
     icon: <Cpu className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />,
   },
   {
@@ -44,7 +44,7 @@ const projects: Project[] = [
     tags: ["React", "Next.js", "AI Hooks", "SSE Streaming", "TypeScript"],
     logo: "/npm-ai-hooks.png",
     github: "https://github.com/iTeebot/npm-ai-hooks",
-    details: "https://labs.iteebot.com/npm-packages/npm-ai-hooks",
+    details: "https://labs.iteebot.com/packages/npm-ai-hooks",
     icon: <Code2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
   },
   {
