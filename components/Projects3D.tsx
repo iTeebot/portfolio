@@ -18,6 +18,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "tinyxml2-rs",
+    type: "Open Source Cargo Crate",
+    description: "A native Rust implementation of the TinyXML2 API. Provides memory-safe XML parsing and DOM generation with FFI compatibility, making it a drop-in safe Rust replacement in legacy C/C++ codebases.",
+    tags: ["Rust", "XML DOM", "FFI Compatibility", "Memory-Safe", "Zero Dependencies"],
+    logo: "/tinyxml2-rs.png",
+    github: "https://github.com/iTeebot/tinyxml2-rs",
+    details: "/packages/tinyxml2-rs",
+    icon: <Cpu className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />,
+  },
+  {
     title: "GestureSmart",
     type: "Open Source Mobile App",
     description: "An open-source mobile application utilizing advanced, real-time hand gesture recognition via on-device camera feeds to trigger smart home and system actions. Built with React Native and powered by Google's MediaPipe framework for low-latency, on-device machine learning.",

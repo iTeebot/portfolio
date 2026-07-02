@@ -15,6 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://iteebot.com"),
   title: "Teebot - Technology Consultancy & Development",
   description: "Teebot is a technology consultancy and development organization creating intelligent, scalable, and future-ready solutions across digital and hardware spectrum. Services in consulting, AI/ML, IoT, web development, and more.",
   keywords: ["technology consultancy", "software development", "AI ML", "IoT", "automation", "web development", "app development", "robotics", "cloud infrastructure"],
