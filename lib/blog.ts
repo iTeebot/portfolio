@@ -39,6 +39,7 @@ function normalizeDateStr(dateStr: string): string {
     // If it contains a timezone T, use standard Date parsing
     if (dateStr.includes("T")) {
       const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
       const year = d.getUTCFullYear();
       const month = String(d.getUTCMonth() + 1).padStart(2, "0");
       const day = String(d.getUTCDate()).padStart(2, "0");
@@ -51,10 +52,24 @@ function normalizeDateStr(dateStr: string): string {
       const month = parts[1].trim().padStart(2, "0");
       const day = parts[2].trim().padStart(2, "0");
       if (year.length === 4 && month.length === 2 && day.length === 2) {
-        return `${year}-${month}-${day}`;
+        const y = parseInt(year, 10);
+        const m = parseInt(month, 10);
+        const dd = parseInt(day, 10);
+
+        // Validate real calendar date (avoid JS rollover)
+        const testDate = new Date(y, m - 1, dd);
+        if (
+          !isNaN(testDate.getTime()) &&
+          testDate.getFullYear() === y &&
+          testDate.getMonth() === m - 1 &&
+          testDate.getDate() === dd
+        ) {
+          return `${year}-${month}-${day}`;
+        }
       }
     }
     const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
     const year = d.getUTCFullYear();
     const month = String(d.getUTCMonth() + 1).padStart(2, "0");
     const day = String(d.getUTCDate()).padStart(2, "0");
