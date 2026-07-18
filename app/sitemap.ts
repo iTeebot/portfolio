@@ -8,7 +8,6 @@ import { getBlogSlugs } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.iteebot.com";
-  const currentDate = new Date();
 
   // 1. Static Pages
   const staticPaths = [
@@ -22,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const staticEntries = staticPaths.map((path) => ({
     url: `${baseUrl}${path}`,
-    lastModified: currentDate,
     changeFrequency: "monthly" as const,
     priority: path === "" ? 1.0 : 0.8,
   }));
@@ -38,7 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const indexEntries = indexPaths.map((path) => ({
     url: `${baseUrl}${path}`,
-    lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
@@ -46,35 +43,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 3. Dynamic Pages
   const serviceEntries = services.map((item) => ({
     url: `${baseUrl}/services/${item.slug}`,
-    lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
   const industryEntries = industries.map((item) => ({
     url: `${baseUrl}/industries/${item.slug}`,
-    lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
   const solutionEntries = solutions.map((item) => ({
     url: `${baseUrl}/solutions/${item.slug}`,
-    lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
 
   const portfolioEntries = portfolioItems.map((item) => ({
     url: `${baseUrl}/portfolio/${item.slug}`,
-    lastModified: currentDate,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
   const caseStudyEntries = caseStudies.map((item) => ({
     url: `${baseUrl}/case-studies/${item.slug}`,
-    lastModified: currentDate,
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
@@ -89,7 +81,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogEntries = blogSlugs.map((slug) => ({
     url: `${baseUrl}/blog/${slug}`,
-    lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.6,
   }));

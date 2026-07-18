@@ -1,14 +1,29 @@
 import React from "react";
 
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [x: string]: JSONValue }
+  | JSONValue[];
+
 interface JsonLdProps {
-  data: Record<string, any>;
+  data: Record<string, JSONValue> | JSONValue;
+}
+
+function safeJsonSerialize(value: JSONValue): string {
+  return JSON.stringify(value)
+    .replace(/&/g, "\\u0026")
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e");
 }
 
 export default function JsonLd({ data }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonSerialize(data) }}
     />
   );
 }

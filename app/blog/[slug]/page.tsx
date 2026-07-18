@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getBlogPost, getBlogSlugs, getAllBlogPosts } from "@/lib/blog";
 import { constructMetadata } from "@/lib/seo";
-import { ArrowLeft, Calendar, User, ChevronRight } from "lucide-react";
+import { ArrowLeft, Calendar, User } from "lucide-react";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import JsonLd, { getArticleSchema } from "@/components/JsonLd";
 

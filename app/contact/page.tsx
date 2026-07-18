@@ -24,7 +24,7 @@ export default function ContactPage() {
               Get In Touch
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-zinc-900 dark:text-white mb-6 leading-tight">
-              Let's Build Something Great
+              Let&apos;s Build Something Great
             </h1>
             <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
               Have a project in mind, need help with automation integrations, or looking to scale your engineering? Send us a message or request a quotation.
@@ -45,7 +45,7 @@ export default function ContactPage() {
                 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Mail className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
+                    <Mail className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                     <div>
                       <h4 className="text-xs font-bold text-zinc-500 uppercase">General inquiries</h4>
                       <a href="mailto:hello@iteebot.com" className="text-sm font-semibold text-zinc-900 dark:text-white hover:underline">
@@ -55,7 +55,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
+                    <MapPin className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                     <div>
                       <h4 className="text-xs font-bold text-zinc-500 uppercase">Location</h4>
                       <p className="text-sm font-semibold text-zinc-900 dark:text-white">
@@ -72,7 +72,7 @@ export default function ContactPage() {
                 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Clock className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
+                    <Clock className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                     <div>
                       <h4 className="text-xs font-bold text-zinc-500 uppercase">Availability</h4>
                       <p className="text-sm font-semibold text-zinc-900 dark:text-white">
@@ -82,7 +82,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Calendar className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
+                    <Calendar className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                     <div>
                       <h4 className="text-xs font-bold text-zinc-500 uppercase">Consultations</h4>
                       <p className="text-sm font-semibold text-zinc-950 dark:text-white">

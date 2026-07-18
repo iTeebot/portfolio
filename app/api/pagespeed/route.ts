@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { getLivePageSpeedMetrics } from "@/lib/pagespeed";
+import { rateLimit, getClientIdentifier } from "@/lib/utils/rateLimit";
+import { portfolioItems } from "@/lib/data/portfolio";
 
 export async function GET(request: Request) {
   try {
@@ -12,6 +14,55 @@ export async function GET(request: Request) {
       return NextResponse.json(
         { error: "Missing url parameter" },
         { status: 400 }
+      );
+    }
+
+    // Validate request host against catalog-owned host allowlist
+    let targetHostname = "";
+    try {
+      targetHostname = new URL(url).hostname;
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid URL format" },
+        { status: 400 }
+      );
+    }
+
+    const allowedHosts = new Set<string>();
+    portfolioItems.forEach((item) => {
+      if (item.deployedUrl) {
+        try {
+          allowedHosts.add(new URL(item.deployedUrl).hostname);
+        } catch {}
+      }
+      if (item.websiteUrl) {
+        try {
+          allowedHosts.add(new URL(item.websiteUrl).hostname);
+        } catch {}
+      }
+    });
+
+    const isAllowed = Array.from(allowedHosts).some((allowedHost) => {
+      const cleanAllowed = allowedHost.replace(/^www\./, "").toLowerCase();
+      const cleanTarget = targetHostname.replace(/^www\./, "").toLowerCase();
+      return cleanAllowed === cleanTarget;
+    });
+
+    if (!isAllowed) {
+      return NextResponse.json(
+        { error: "Forbidden: Host not in allowlist" },
+        { status: 403 }
+      );
+    }
+
+    // Rate limiting
+    const identifier = getClientIdentifier(request);
+    const rateCheck = rateLimit(identifier, 30, 60 * 1000); // 30 requests per minute
+
+    if (!rateCheck.success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
       );
     }
 

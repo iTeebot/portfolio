@@ -31,35 +31,60 @@ export default function MarkdownRenderer({ content }: { content: string }) {
 
     if (line.startsWith("# ")) {
       elements.push(
-        <h1 key={i} className="text-3xl sm:text-4xl font-serif font-bold text-zinc-900 dark:text-white mt-10 mb-4 leading-tight">
+        <h2 key={i} className="text-3xl sm:text-4xl font-serif font-bold text-zinc-900 dark:text-white mt-10 mb-4 leading-tight">
           {parseInline(line.substring(2))}
-        </h1>
+        </h2>
       );
     } else if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={i} className="text-2xl sm:text-3xl font-serif font-bold text-zinc-900 dark:text-white mt-8 mb-4">
+        <h3 key={i} className="text-2xl sm:text-3xl font-serif font-bold text-zinc-900 dark:text-white mt-8 mb-4">
           {parseInline(line.substring(3))}
-        </h2>
+        </h3>
       );
     } else if (line.startsWith("### ")) {
       elements.push(
-        <h3 key={i} className="text-xl sm:text-2xl font-serif font-bold text-zinc-900 dark:text-white mt-6 mb-3">
+        <h4 key={i} className="text-xl sm:text-2xl font-serif font-bold text-zinc-900 dark:text-white mt-6 mb-3">
           {parseInline(line.substring(4))}
-        </h3>
+        </h4>
       );
     } else if (line.startsWith("- ") || line.startsWith("* ")) {
+      const listItems: React.ReactNode[] = [];
+      let j = i;
+      while (
+        j < lines.length &&
+        (lines[j].startsWith("- ") || lines[j].startsWith("* "))
+      ) {
+        listItems.push(
+          <li key={j} className="text-zinc-700 dark:text-zinc-300 text-base mb-2">
+            {parseInline(lines[j].substring(2))}
+          </li>
+        );
+        j++;
+      }
       elements.push(
-        <li key={i} className="ml-6 list-disc text-zinc-700 dark:text-zinc-300 text-base mb-2">
-          {parseInline(line.substring(2))}
-        </li>
+        <ul key={`ul-${i}`} className="ml-6 list-disc space-y-1 my-4">
+          {listItems}
+        </ul>
       );
+      i = j - 1;
     } else if (/^\d+\.\s/.test(line)) {
-      const contentOnly = line.replace(/^\d+\.\s/, "");
+      const listItems: React.ReactNode[] = [];
+      let j = i;
+      while (j < lines.length && /^\d+\.\s/.test(lines[j])) {
+        const contentOnly = lines[j].replace(/^\d+\.\s/, "");
+        listItems.push(
+          <li key={j} className="text-zinc-700 dark:text-zinc-300 text-base mb-2">
+            {parseInline(contentOnly)}
+          </li>
+        );
+        j++;
+      }
       elements.push(
-        <li key={i} className="ml-6 list-decimal text-zinc-700 dark:text-zinc-300 text-base mb-2">
-          {parseInline(contentOnly)}
-        </li>
+        <ol key={`ol-${i}`} className="ml-6 list-decimal space-y-1 my-4">
+          {listItems}
+        </ol>
       );
+      i = j - 1;
     } else if (line.trim() === "") {
       elements.push(<div key={i} className="h-4" />);
     } else {

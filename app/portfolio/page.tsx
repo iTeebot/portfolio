@@ -41,7 +41,7 @@ export default function PortfolioPage() {
             {portfolioItems.map((item) => (
               <Link
                 key={item.slug}
-                href={`/case-studies/${item.slug}`}
+                href={`/portfolio/${item.slug}`}
                 className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-900 dark:hover:border-white transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="relative h-64 w-full bg-zinc-200 dark:bg-zinc-800">

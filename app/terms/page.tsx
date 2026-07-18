@@ -41,7 +41,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">4. Revisions & Errata</h2>
             <p>
-              The materials appearing on Teebot's website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on this website are accurate, complete, or current.
+              The materials appearing on Teebot&apos;s website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on this website are accurate, complete, or current.
             </p>
           </div>
         </div>

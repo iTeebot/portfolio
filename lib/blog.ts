@@ -17,33 +17,12 @@ const blogDirectory = path.join(process.cwd(), "content/blog");
 // Self-bootstrap: Create directories if they do not exist
 function ensureBlogDir() {
   if (!fs.existsSync(blogDirectory)) {
-    fs.mkdirSync(blogDirectory, { recursive: true });
-    // Write a dummy blog post so it is not empty
-    const dummyPost = `---
-title: "AI Agents for Business Automation"
-date: "2026-07-19"
-description: "How autonomous AI agents are revolutionizing standard workflow automation and operational efficiency."
-author: "Ateeb Noone"
-keywords: "AI agents, business automation, workflow automation"
-image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop"
----
-
-# Introduction to AI Agents
-
-Artificial Intelligence is transitioning from passive chatbots to **autonomous agents**. These agents can plan, use tools, call APIs, and self-correct when errors arise.
-
-## Why AI Agents?
-
-Unlike traditional rule-based workflow automations, agentic systems can handle ambiguity:
-1. **Understand context**: Reason through complex instructions.
-2. **Execute steps**: Choose appropriate tools sequentially.
-3. **Handle errors**: Retry operations and adjust strategies automatically.
-
-## Conclusion
-
-Integrating AI agents into your CRM and ERP workflows increases operational speed and reduces manual errors by over 90%.
-`;
-    fs.writeFileSync(path.join(blogDirectory, "ai-agents-for-business.md"), dummyPost);
+    try {
+      fs.mkdirSync(blogDirectory, { recursive: true });
+    } catch (error) {
+      console.error("Failed to create blog directory:", error);
+      throw new Error(`Blog directory is missing or unwritable: ${blogDirectory}`);
+    }
   }
 }
 
@@ -56,6 +35,11 @@ export function getBlogSlugs(): string[] {
 }
 
 export function getBlogPost(slug: string): BlogPost | null {
+  // Validate slug to prevent path traversal or invalid characters
+  if (!slug || typeof slug !== "string" || !/^[a-zA-Z0-9-_]+$/.test(slug)) {
+    return null;
+  }
+
   try {
     ensureBlogDir();
     const filePath = path.join(blogDirectory, `${slug}.md`);
@@ -113,9 +97,15 @@ export function getBlogPost(slug: string): BlogPost | null {
 
 export function getAllBlogPosts(): BlogPost[] {
   const slugs = getBlogSlugs();
+  const now = new Date();
   const posts = slugs
     .map((slug) => getBlogPost(slug))
-    .filter((post): post is BlogPost => post !== null);
+    .filter((post): post is BlogPost => {
+      if (post === null) return false;
+      const postDate = new Date(post.date);
+      // Exclude posts whose publication dates are in the future
+      return postDate.getTime() <= now.getTime();
+    });
 
   // Sort by date descending
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

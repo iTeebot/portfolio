@@ -14,9 +14,11 @@ export default function PerformanceStats({
   fallbackLcp,
   fallbackSize,
 }: PerformanceStatsProps) {
-  const [metrics, setMetrics] = useState<{ lcp: string; size: string } | null>(
-    null
-  );
+  const [metrics, setMetrics] = useState<{
+    lcp: string;
+    size: string;
+    isLive: boolean;
+  } | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export default function PerformanceStats({
     async function fetchMetrics() {
       if (!url) {
         if (isMounted) {
-          setMetrics({ lcp: fallbackLcp, size: fallbackSize });
+          setMetrics({ lcp: fallbackLcp, size: fallbackSize, isLive: false });
           setIsLoading(false);
         }
         return;
@@ -41,12 +43,16 @@ export default function PerformanceStats({
         if (!res.ok) throw new Error("Failed to load metrics");
         const data = await res.json();
         if (isMounted) {
-          setMetrics({ lcp: data.lcp, size: data.size });
+          setMetrics({
+            lcp: data.lcp,
+            size: data.size,
+            isLive: typeof data.isLive === "boolean" ? data.isLive : true,
+          });
         }
       } catch (err) {
         console.error("Error loading pagespeed metrics client-side:", err);
         if (isMounted) {
-          setMetrics({ lcp: fallbackLcp, size: fallbackSize });
+          setMetrics({ lcp: fallbackLcp, size: fallbackSize, isLive: false });
         }
       } finally {
         if (isMounted) {
@@ -95,9 +101,15 @@ export default function PerformanceStats({
           {metrics?.size}
         </span>
       </div>
-      <div className="text-right text-[10px] text-zinc-400 dark:text-zinc-500 pt-1">
-        Live metric cached (24h)
-      </div>
+      {metrics?.isLive ? (
+        <div className="text-right text-[10px] text-zinc-400 dark:text-zinc-500 pt-1">
+          Live metric cached (24h)
+        </div>
+      ) : (
+        <div className="text-right text-[10px] text-amber-600 dark:text-amber-500 pt-1 font-semibold">
+          Estimated fallback metrics
+        </div>
+      )}
     </div>
   );
 }

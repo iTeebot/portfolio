@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
 import { ShieldCheck, Target, Heart, Award, Github, Linkedin } from "lucide-react";
 import JsonLd, { getLocalBusinessSchema } from "@/components/JsonLd";
@@ -95,6 +94,7 @@ export default function AboutPage() {
                     href="https://github.com/ateebnoone"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="GitHub profile of Ateeb Noone"
                     className="p-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-900 rounded-md transition-colors"
                   >
                     <Github className="w-4 h-4" />
@@ -103,6 +103,7 @@ export default function AboutPage() {
                     href="https://www.linkedin.com/in/ateebnoone"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="LinkedIn profile of Ateeb Noone"
                     className="p-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-900 rounded-md transition-colors"
                   >
                     <Linkedin className="w-4 h-4" />
@@ -115,7 +116,7 @@ export default function AboutPage() {
                   Ateeb is a veteran full-stack developer and AI automation consultant. He has engineered complex cloud architectures, cryptographic blockchain secure layers, and LMS platforms. At Teebot, he drives technical direction, ensuring every project is delivered on schedule and with high execution precision.
                 </p>
                 <p className="text-zinc-500 text-xs italic">
-                  "We build software that solves business bottlenecks, not generic apps. Our work is clean, performant, and reliable."
+                  &ldquo;We build software that solves business bottlenecks, not generic apps. Our work is clean, performant, and reliable.&rdquo;
                 </p>
               </div>
             </div>

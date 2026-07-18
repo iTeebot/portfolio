@@ -41,10 +41,10 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}
       >
         <Navigation />
-        <div className="flex-grow pt-20">
+        <main className="flex-grow pt-20">
           <Breadcrumbs />
           {children}
-        </div>
+        </main>
         <Footer />
         <ScrollToTop />
       </body>

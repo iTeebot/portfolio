@@ -3,7 +3,7 @@ import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
 import { portfolioItems } from "@/lib/data/portfolio";
 import { constructMetadata } from "@/lib/seo";
-import { ArrowLeft, ArrowRight, Layers, HelpCircle, HardDrive, CheckSquare, Clock, Globe, Github, Smartphone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Layers, HelpCircle, HardDrive, Clock, Globe, Github, Smartphone } from "lucide-react";
 import JsonLd, { getFAQSchema } from "@/components/JsonLd";
 import PerformanceStats from "@/components/PerformanceStats";
 

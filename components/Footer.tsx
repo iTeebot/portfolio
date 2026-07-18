@@ -40,7 +40,7 @@ export default function Footer() {
         setStatus('error');
         setStatusMessage(data.error || 'Something went wrong.');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setStatusMessage('Failed to subscribe. Please try again.');
     }

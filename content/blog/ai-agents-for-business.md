@@ -20,4 +20,4 @@ Unlike traditional rule-based workflow automations, agentic systems can handle a
 
 ## Conclusion
 
-Integrating AI agents into your CRM and ERP workflows increases operational speed and reduces manual errors by over 90%.
+Integrating AI agents into your CRM and ERP workflows increases operational speed and significantly reduces manual errors.

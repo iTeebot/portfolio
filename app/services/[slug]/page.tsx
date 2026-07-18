@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { services } from "@/lib/data/services";
 import { constructMetadata } from "@/lib/seo";
-import { ArrowRight, CheckCircle2, ChevronRight, HelpCircle, Info, Calendar, DollarSign, ArrowLeft } from "lucide-react";
+import { CheckCircle2, ChevronRight, HelpCircle, Calendar, DollarSign, ArrowLeft } from "lucide-react";
 import JsonLd, { getServiceSchema, getFAQSchema } from "@/components/JsonLd";
 
 interface Props {
@@ -74,7 +74,7 @@ export default async function ServicePage({ params }: Props) {
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-3">
-                  <Calendar className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
+                  <Calendar className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                   <div>
                     <h4 className="text-sm font-semibold text-zinc-900 dark:text-white">Estimated Timeline</h4>
                     <p className="text-zinc-600 dark:text-zinc-400 text-sm">{service.timeline}</p>
@@ -82,7 +82,7 @@ export default async function ServicePage({ params }: Props) {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <DollarSign className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 flex-shrink-0" />
+                  <DollarSign className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mt-0.5 shrink-0" />
                   <div>
                     <h4 className="text-sm font-semibold text-zinc-900 dark:text-white">Pricing Approach</h4>
                     <p className="text-zinc-600 dark:text-zinc-400 text-sm">{service.pricingApproach}</p>
@@ -154,7 +154,7 @@ export default async function ServicePage({ params }: Props) {
               <ul className="space-y-4">
                 {service.features.map((feature, i) => (
                   <li key={i} className="flex gap-3 text-zinc-700 dark:text-zinc-300">
-                    <ChevronRight className="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0 mt-0.5" />
+                    <ChevronRight className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
                 ))}

@@ -71,7 +71,7 @@ export default function Breadcrumbs() {
 
             return (
               <li key={to} className="flex items-center space-x-2">
-                <ChevronRight className="w-4 h-4 text-zinc-300 dark:text-zinc-700 flex-shrink-0" />
+                <ChevronRight className="w-4 h-4 text-zinc-300 dark:text-zinc-700 shrink-0" />
                 {last ? (
                   <span className="font-semibold text-zinc-900 dark:text-white" aria-current="page">
                     {formatSlug(value)}

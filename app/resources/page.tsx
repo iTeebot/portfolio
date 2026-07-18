@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
 import { ArrowRight, Link2 } from "lucide-react";
 
@@ -19,22 +20,22 @@ export default function ResourcesPage() {
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <span className="inline-block bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 font-semibold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider mb-6">
-            Developer & Client Assets
+            Resource Library
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-zinc-900 dark:text-white mb-6 leading-tight">
-            Engineering Resources
+            Guides & Whitepapers
           </h1>
           <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
-            Access our open engineering guidelines, research whitepapers, architecture checklists, and configuration logs.
+            Access our engineering specifications, standard architecture patterns, and technical templates.
           </p>
         </div>
 
         {/* Resources Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {materials.map((mat, idx) => (
+          {materials.map((mat) => (
             <div
-              key={idx}
-              className="p-8 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl flex flex-col justify-between"
+              key={mat.title}
+              className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 flex flex-col justify-between"
             >
               <div>
                 <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block mb-2">
@@ -47,13 +48,13 @@ export default function ResourcesPage() {
                   {mat.desc}
                 </p>
               </div>
-              <button
+              <Link
+                href="/contact"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mt-auto self-start"
-                disabled
               >
                 <span>Request Asset Access</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
             </div>
           ))}
         </div>

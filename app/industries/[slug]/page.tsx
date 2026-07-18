@@ -152,7 +152,7 @@ export default async function IndustryPage({ params }: Props) {
                 Ready to optimize your {ind.title.toLowerCase()} operations?
               </h2>
               <p className="text-zinc-400 dark:text-zinc-600 text-sm max-w-xl">
-                Let's plan custom software integrations that save manual effort, secure audits, and improve profit margins.
+                Let&apos;s plan custom software integrations that save manual effort, secure audits, and improve profit margins.
               </p>
             </div>
             <Link

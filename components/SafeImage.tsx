@@ -14,7 +14,13 @@ export default function SafeImage({
   alt,
   ...props
 }: SafeImageProps) {
+  const [prevSrc, setPrevSrc] = useState<string>(src);
   const [imgSrc, setImgSrc] = useState<string>(src);
+
+  if (src !== prevSrc) {
+    setPrevSrc(src);
+    setImgSrc(src);
+  }
 
   return (
     <Image
