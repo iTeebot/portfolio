@@ -255,7 +255,7 @@ export default function Projects3D() {
                   });
                 }
               }}
-              className="w-12 h-12 flex items-center justify-center group focus:outline-none"
+              className="w-12 h-12 flex items-center justify-center group focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-full focus-visible:outline-none"
               aria-label={`Go to project ${index + 1}`}
             >
               <span
