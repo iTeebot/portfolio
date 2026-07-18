@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { constructMetadata } from "@/lib/seo";
 import { ShieldCheck, Target, Heart, Award, Github, Linkedin } from "lucide-react";
 import JsonLd, { getLocalBusinessSchema } from "@/components/JsonLd";
