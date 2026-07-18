@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
 import { Github, ExternalLink, Cpu, Code2, Receipt, ShoppingBag } from "lucide-react";
 
 interface Project {
@@ -274,7 +274,7 @@ interface ProjectWrapperProps {
   project: Project;
   index: number;
   totalProjects: number;
-  scrollYProgress: any;
+  scrollYProgress: MotionValue<number>;
   activeProject: number;
   onCardClick: (index: number) => void;
 }

@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Copy, Check, Terminal, ExternalLink, Shield, Zap, CheckCircle2, Cpu, Code, Layers, FileText, Github } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowRight, Copy, Check, Terminal, Shield, Zap, CheckCircle2, Cpu, Code, Layers, Github } from "lucide-react";
 
 const codeExamples = {
   rust_dom: {
@@ -222,7 +221,7 @@ export default function TinyXmlDetail() {
       {/* Code Examples */}
       <section className="mb-16">
         <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-6">Code Examples</h2>
-        
+
         {/* Tabs Headers */}
         <div className="flex border-b border-zinc-200 dark:border-zinc-800 mb-6 gap-2 sm:gap-6 overflow-x-auto pb-px">
           {(Object.keys(codeExamples) as Array<keyof typeof codeExamples>).map((key) => {
@@ -232,11 +231,10 @@ export default function TinyXmlDetail() {
               <button
                 key={key}
                 onClick={() => setActiveTab(key)}
-                className={`pb-3 text-sm sm:text-base font-medium border-b-2 transition-all whitespace-nowrap px-1 relative ${
-                  isActive 
-                    ? "border-zinc-900 dark:border-white text-zinc-900 dark:text-white" 
-                    : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
-                }`}
+                className={`pb-3 text-sm sm:text-base font-medium border-b-2 transition-all whitespace-nowrap px-1 relative ${isActive
+                  ? "border-zinc-900 dark:border-white text-zinc-900 dark:text-white"
+                  : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                  }`}
               >
                 {label}
               </button>

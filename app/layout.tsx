@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter, Playfair_Display } from "next/font/google";
+import { constructMetadata } from "@/lib/seo";
+import Navigation from "@/components/Navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,29 +20,7 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://iteebot.com"),
-  title: "Teebot - Technology Consultancy & Development",
-  description: "Teebot is a technology consultancy and development organization creating intelligent, scalable, and future-ready solutions across digital and hardware spectrum. Services in consulting, AI/ML, IoT, web development, and more.",
-  keywords: ["technology consultancy", "software development", "AI ML", "IoT", "automation", "web development", "app development", "robotics", "cloud infrastructure"],
-  authors: [{ name: "Teebot" }],
-  openGraph: {
-    title: "Teebot - Technology Consultancy & Development",
-    description: "Creating intelligent, scalable, and future-ready technology solutions",
-    url: "https://iteebot.com",
-    siteName: "Teebot",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Teebot - Technology Consultancy & Development",
-    description: "Creating intelligent, scalable, and future-ready technology solutions",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export const metadata: Metadata = constructMetadata();
 
 export default function RootLayout({
   children,
@@ -55,9 +38,15 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50`}
       >
-        {children}
+        <Navigation />
+        <main className="flex-grow pt-20">
+          <Breadcrumbs />
+          {children}
+        </main>
+        <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );
