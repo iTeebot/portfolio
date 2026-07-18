@@ -34,6 +34,36 @@ export function getBlogSlugs(): string[] {
     .map((file) => file.replace(/\.md$/, ""));
 }
 
+function normalizeDateStr(dateStr: string): string {
+  try {
+    // If it contains a timezone T, use standard Date parsing
+    if (dateStr.includes("T")) {
+      const d = new Date(dateStr);
+      const year = d.getUTCFullYear();
+      const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+      const day = String(d.getUTCDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+    // Split by dash or slash to handle calendar dates without timezone skew
+    const parts = dateStr.split(/[-/]/);
+    if (parts.length === 3) {
+      const year = parts[0].trim();
+      const month = parts[1].trim().padStart(2, "0");
+      const day = parts[2].trim().padStart(2, "0");
+      if (year.length === 4 && month.length === 2 && day.length === 2) {
+        return `${year}-${month}-${day}`;
+      }
+    }
+    const d = new Date(dateStr);
+    const year = d.getUTCFullYear();
+    const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(d.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  } catch {
+    return dateStr;
+  }
+}
+
 export function getBlogPost(slug: string): BlogPost | null {
   // Validate slug to prevent path traversal or invalid characters
   if (!slug || typeof slug !== "string" || !/^[a-zA-Z0-9-_]+$/.test(slug)) {
@@ -53,7 +83,7 @@ export function getBlogPost(slug: string): BlogPost | null {
       return {
         slug,
         title: slug.replace(/-/g, " "),
-        date: new Date().toISOString().split("T")[0],
+        date: normalizeDateStr(new Date().toISOString().split("T")[0]),
         description: "",
         author: "Teebot",
         keywords: [],
@@ -82,7 +112,7 @@ export function getBlogPost(slug: string): BlogPost | null {
     return {
       slug,
       title: metadata.title || slug.replace(/-/g, " "),
-      date: metadata.date || new Date().toISOString().split("T")[0],
+      date: normalizeDateStr(metadata.date || new Date().toISOString().split("T")[0]),
       description: metadata.description || "",
       author: metadata.author || "Teebot",
       keywords,
@@ -97,14 +127,14 @@ export function getBlogPost(slug: string): BlogPost | null {
 
 export function getAllBlogPosts(): BlogPost[] {
   const slugs = getBlogSlugs();
-  // Adjust server time to PKT (UTC+5) to align with Pakistan release timezone
-  const PKT_OFFSET = 5 * 60 * 60 * 1000;
-  const nowPKT = new Date(Date.now() + PKT_OFFSET);
-
-  const year = nowPKT.getUTCFullYear();
-  const month = String(nowPKT.getUTCMonth() + 1).padStart(2, "0");
-  const day = String(nowPKT.getUTCDate()).padStart(2, "0");
-  const todayStr = `${year}-${month}-${day}`;
+  
+  // Format current date in Asia/Karachi to YYYY-MM-DD directly using en-CA locale
+  const todayStr = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Karachi",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
 
   const posts = slugs
     .map((slug) => getBlogPost(slug))
