@@ -33,15 +33,8 @@ export default function PrivacyPage() {
 
           <div>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">3. Cookies & Analytics</h2>
-            <p className="mb-4">
-              We utilize analytics identifiers (such as Google Analytics) to monitor website traffic, CTR, and core loading speeds, allowing us to continuously improve our layout accessibility.
-            </p>
             <p>
-              Additionally, this website integrates Google AdSense to serve advertising creatives. Google and its partner networks use third-party cookies to serve ads based on your visits to this website and other portals across the internet. You can choose to opt out of personalized advertising by visiting Google&apos;s Ads Settings page at{" "}
-              <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-indigo-650 dark:text-indigo-400 hover:underline">
-                adssettings.google.com
-              </a>
-              , or manage third-party cookie consents through your local browser preference choices.
+              We utilize analytics identifiers (such as Google Analytics) to monitor website traffic, CTR, and core loading speeds, allowing us to continuously improve our layout accessibility.
             </p>
           </div>
 

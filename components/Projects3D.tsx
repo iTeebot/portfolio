@@ -358,14 +358,13 @@ function Project3DWrapper({
         project={project}
         isActive={activeProject === index}
         onClick={() => onCardClick(index)}
-        index={index}
       />
     </motion.div>
   );
 }
 
 /* Internal Interactive Tilt Card Component */
-function ProjectCard({ project, isActive, onClick, index }: { project: Project; isActive: boolean; onClick: () => void; index: number }) {
+function ProjectCard({ project, isActive, onClick }: { project: Project; isActive: boolean; onClick: () => void }) {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -424,9 +423,9 @@ function ProjectCard({ project, isActive, onClick, index }: { project: Project; 
           src={project.logo}
           alt={project.title}
           fill
-          sizes="(max-width: 640px) 240px, 320px"
+          sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 320px"
           className="object-contain select-none"
-          loading={index === 0 ? "eager" : "lazy"}
+          loading="lazy"
         />
       </div>
 
