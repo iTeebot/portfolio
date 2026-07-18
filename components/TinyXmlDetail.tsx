@@ -137,7 +137,7 @@ export default function TinyXmlDetail() {
           alt="tinyxml2-rs"
           fill
           priority
-          sizes="(max-w-4xl) 100vw, 896px"
+          sizes="(max-width: 56rem) 100vw, 896px"
           className="object-contain"
         />
       </div>
