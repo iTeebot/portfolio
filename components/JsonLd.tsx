@@ -58,18 +58,11 @@ export function getLocalBusinessSchema() {
     "image": "https://www.iteebot.com/logo.png",
     "@id": "https://www.iteebot.com/#business",
     "url": "https://www.iteebot.com",
-    "telephone": "",
-    "priceRange": "$$$",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Karachi",
       "addressRegion": "Sindh",
       "addressCountry": "PK"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 24.8607,
-      "longitude": 67.0011
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",

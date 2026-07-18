@@ -34,6 +34,51 @@ export function getBlogSlugs(): string[] {
     .map((file) => file.replace(/\.md$/, ""));
 }
 
+function normalizeDateStr(dateStr: string): string {
+  try {
+    // If it contains a timezone T, use standard Date parsing
+    if (dateStr.includes("T")) {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      const year = d.getUTCFullYear();
+      const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+      const day = String(d.getUTCDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+    // Split by dash or slash to handle calendar dates without timezone skew
+    const parts = dateStr.split(/[-/]/);
+    if (parts.length === 3) {
+      const year = parts[0].trim();
+      const month = parts[1].trim().padStart(2, "0");
+      const day = parts[2].trim().padStart(2, "0");
+      if (year.length === 4 && month.length === 2 && day.length === 2) {
+        const y = parseInt(year, 10);
+        const m = parseInt(month, 10);
+        const dd = parseInt(day, 10);
+
+        // Validate real calendar date (avoid JS rollover)
+        const testDate = new Date(y, m - 1, dd);
+        if (
+          !isNaN(testDate.getTime()) &&
+          testDate.getFullYear() === y &&
+          testDate.getMonth() === m - 1 &&
+          testDate.getDate() === dd
+        ) {
+          return `${year}-${month}-${day}`;
+        }
+      }
+    }
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    const year = d.getUTCFullYear();
+    const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(d.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  } catch {
+    return dateStr;
+  }
+}
+
 export function getBlogPost(slug: string): BlogPost | null {
   // Validate slug to prevent path traversal or invalid characters
   if (!slug || typeof slug !== "string" || !/^[a-zA-Z0-9-_]+$/.test(slug)) {
@@ -53,7 +98,7 @@ export function getBlogPost(slug: string): BlogPost | null {
       return {
         slug,
         title: slug.replace(/-/g, " "),
-        date: new Date().toISOString().split("T")[0],
+        date: normalizeDateStr(new Date().toISOString().split("T")[0]),
         description: "",
         author: "Teebot",
         keywords: [],
@@ -82,7 +127,7 @@ export function getBlogPost(slug: string): BlogPost | null {
     return {
       slug,
       title: metadata.title || slug.replace(/-/g, " "),
-      date: metadata.date || new Date().toISOString().split("T")[0],
+      date: normalizeDateStr(metadata.date || new Date().toISOString().split("T")[0]),
       description: metadata.description || "",
       author: metadata.author || "Teebot",
       keywords,
@@ -97,14 +142,21 @@ export function getBlogPost(slug: string): BlogPost | null {
 
 export function getAllBlogPosts(): BlogPost[] {
   const slugs = getBlogSlugs();
-  const now = new Date();
+  
+  // Format current date in Asia/Karachi to YYYY-MM-DD directly using en-CA locale
+  const todayStr = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Karachi",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
   const posts = slugs
     .map((slug) => getBlogPost(slug))
     .filter((post): post is BlogPost => {
       if (post === null) return false;
-      const postDate = new Date(post.date);
-      // Exclude posts whose publication dates are in the future
-      return postDate.getTime() <= now.getTime();
+      // Exclude posts whose publication dates are in the future relative to PKT calendar day
+      return post.date <= todayStr;
     });
 
   // Sort by date descending
