@@ -238,7 +238,7 @@ export default function Projects3D() {
         </div>
 
         {/* Navigation Indicator / Pagination dots */}
-        <div className="relative z-10 flex justify-center gap-2 pt-2">
+        <div className="relative z-10 flex justify-center gap-0 pt-2">
           {projects.map((_, index) => (
             <button
               key={index}
@@ -255,13 +255,17 @@ export default function Projects3D() {
                   });
                 }
               }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                activeProject === index 
-                  ? "w-6 bg-zinc-800 dark:bg-white" 
-                  : "w-1.5 bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400"
-              }`}
+              className="w-12 h-12 flex items-center justify-center group focus:outline-none"
               aria-label={`Go to project ${index + 1}`}
-            />
+            >
+              <span
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeProject === index
+                    ? "w-6 bg-zinc-800 dark:bg-white"
+                    : "w-1.5 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-400"
+                }`}
+              />
+            </button>
           ))}
         </div>
 

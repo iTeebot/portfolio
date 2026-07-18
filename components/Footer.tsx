@@ -226,19 +226,19 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-500 text-sm">
+          <p className="text-zinc-400 text-sm">
             © {currentYear} Teebot. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
               href="/privacy"
-              className="text-zinc-500 hover:text-white text-sm transition-colors"
+              className="text-zinc-400 hover:text-white text-sm transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-zinc-500 hover:text-white text-sm transition-colors"
+              className="text-zinc-400 hover:text-white text-sm transition-colors"
             >
               Terms of Service
             </Link>
