@@ -97,14 +97,21 @@ export function getBlogPost(slug: string): BlogPost | null {
 
 export function getAllBlogPosts(): BlogPost[] {
   const slugs = getBlogSlugs();
-  const now = new Date();
+  // Adjust server time to PKT (UTC+5) to align with Pakistan release timezone
+  const PKT_OFFSET = 5 * 60 * 60 * 1000;
+  const nowPKT = new Date(Date.now() + PKT_OFFSET);
+
+  const year = nowPKT.getUTCFullYear();
+  const month = String(nowPKT.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(nowPKT.getUTCDate()).padStart(2, "0");
+  const todayStr = `${year}-${month}-${day}`;
+
   const posts = slugs
     .map((slug) => getBlogPost(slug))
     .filter((post): post is BlogPost => {
       if (post === null) return false;
-      const postDate = new Date(post.date);
-      // Exclude posts whose publication dates are in the future
-      return postDate.getTime() <= now.getTime();
+      // Exclude posts whose publication dates are in the future relative to PKT calendar day
+      return post.date <= todayStr;
     });
 
   // Sort by date descending
