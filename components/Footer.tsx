@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Github, Linkedin, Facebook, Instagram, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -120,28 +121,28 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#about"
+                <Link
+                  href="/about"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#divisions"
+                <Link
+                  href="/services"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >
-                  Divisions
-                </a>
+                  Services
+                </Link>
               </li>
               <li>
-                <a
-                  href="#contact"
+                <Link
+                  href="/contact"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -229,18 +230,18 @@ export default function Footer() {
             © {currentYear} Teebot. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a
-              href="https://iteebot.com"
+            <Link
+              href="/privacy"
               className="text-zinc-500 hover:text-white text-sm transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="https://iteebot.com"
+            </Link>
+            <Link
+              href="/terms"
               className="text-zinc-500 hover:text-white text-sm transition-colors"
             >
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
