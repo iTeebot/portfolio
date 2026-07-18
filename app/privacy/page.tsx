@@ -34,7 +34,7 @@ export default function PrivacyPage() {
           <div>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">3. Cookies & Analytics</h2>
             <p>
-              We utilize analytics identifiers (such as Google Analytics) to monitor website traffic, CTR, and core loading speeds, allowing us to continuously improve our layout accessibility.
+              This website does not deploy third-party tracking cookies or collect behavioral analytics identifiers. We only collect the minimal personal data you voluntarily provide to us when submitting forms.
             </p>
           </div>
 
