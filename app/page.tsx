@@ -1,9 +1,11 @@
 import Hero from "@/components/Hero";
-import Projects3D from "@/components/Projects3D";
-import About from "@/components/About";
-import Divisions from "@/components/Divisions";
-import Contact from "@/components/Contact";
+import dynamic from "next/dynamic";
 import JsonLd, { getOrganizationSchema, getLocalBusinessSchema } from "@/components/JsonLd";
+
+const Projects3D = dynamic(() => import("@/components/Projects3D"), { ssr: true });
+const About = dynamic(() => import("@/components/About"), { ssr: true });
+const Divisions = dynamic(() => import("@/components/Divisions"), { ssr: true });
+const Contact = dynamic(() => import("@/components/Contact"), { ssr: true });
 
 export default function Home() {
   return (

@@ -217,7 +217,7 @@ export default function Projects3D() {
                     href={projects[activeProject].github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"
                   >
                     <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     Repository
@@ -227,7 +227,7 @@ export default function Projects3D() {
                   href={projects[activeProject].details}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors bg-white dark:bg-zinc-950"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors bg-white dark:bg-zinc-950"
                 >
                   <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   Visit Website
@@ -423,10 +423,9 @@ function ProjectCard({ project, isActive, onClick }: { project: Project; isActiv
           src={project.logo}
           alt={project.title}
           fill
-          sizes="(max-w-7xl) 320px, 240px"
+          sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 320px"
           className="object-contain select-none"
-          priority
-          unoptimized
+          loading="lazy"
         />
       </div>
 
