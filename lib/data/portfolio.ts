@@ -37,7 +37,7 @@ export const portfolioItems: PortfolioItem[] = [
     client: "Tax Consultancy Enterprise",
     metric: "FBR tax integration automated",
     metaTitle: "AFM SOLUTION Tax Platform Portfolio | Teebot",
-    metaDescription: "Official website of AFM SOLUTION, a premier tax consultancy and digital invoicing platform featuring FBR integration, return filings, and a custom tax calculator.",
+    metaDescription: "Official website of AFM SOLUTION, a premier tax consultancy and digital invoicing platform with FBR return filings and custom tax calculator.",
     image: `${baseUrl}/websites/afm-solution.png`,
     overview: "AFM SOLUTION is a modern taxation consultancy and digital invoicing portal. Teebot designed the platform to support direct return filing, auto-calculated tax estimations, and FBR database validation checks.",
     problem: "Pakistani businesses struggle with manual tax return calculations, leading to tax non-compliance and delays in filing return documentation.",
@@ -269,7 +269,7 @@ export const portfolioItems: PortfolioItem[] = [
     metric: "Camera & Eye Gesture Device Control",
     metaTitle: "Gesture Smart Accessibility App | Teebot",
     metaDescription: "A smart mobile app to control Android devices using eye gestures, camera tracks, and voice commands.",
-    image: `${baseUrl}/gesture_smart.png`,
+    image: "/gesture_smart.png",
     overview: "Gesture Smart is an accessibility mobile app that allows disabled users to operate Android devices using eye movements, facial tracks, and voice commands.",
     problem: "Disabled users struggle to tap touchscreen interfaces, limiting their mobile device accessibility.",
     businessGoal: "Build an offline facial gesture detector mapping eye winks and voice commands to device touch events.",
@@ -424,8 +424,7 @@ export const portfolioItems: PortfolioItem[] = [
     ],
     faqs: [
       { question: "Is there an Android version?", answer: "This client code was optimized for iOS, but shares modules suitable for future Android compilation." }
-    ],
-    deployedUrl: "https://apps.apple.com/lc/app/tendor-app/id6450906363"
+    ]
   },
   {
     slug: "the-imagination",
@@ -458,7 +457,7 @@ export const portfolioItems: PortfolioItem[] = [
     faqs: [
       { question: "How secure is cart data?", answer: "Cart data is saved locally in state files and verified at checkouts via serverless check scripts." }
     ],
-    deployedUrl: "https://the-imagination.vercel.app/"
+    deployedUrl: "https://www.imaginationpk.com"
   },
   {
     slug: "ib-tech",
@@ -589,8 +588,7 @@ export const portfolioItems: PortfolioItem[] = [
     ],
     faqs: [
       { question: "Is data saved to a server?", answer: "No, all diagnostic data is persisted on local browser storage for safety." }
-    ],
-    websiteUrl: "https://github.com/AteebNoOne/InvoiceManager" // using github as website since it's open source client-only
+    ]
   },
   {
     slug: "flair-home",

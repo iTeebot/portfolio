@@ -6,6 +6,7 @@ import { constructMetadata } from "@/lib/seo";
 import { ArrowLeft, ArrowRight, Layers, HelpCircle, HardDrive, Clock, Globe, Github, Smartphone } from "lucide-react";
 import JsonLd, { getFAQSchema } from "@/components/JsonLd";
 import PerformanceStats from "@/components/PerformanceStats";
+import RelatedProjects from "@/components/RelatedProjects";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -284,6 +285,8 @@ export default async function PortfolioItemPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          <RelatedProjects currentSlug={item.slug} type="portfolio" />
         </div>
       </article>
     </>

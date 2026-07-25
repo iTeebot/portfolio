@@ -25,6 +25,8 @@ export default function Navigation() {
     { name: "Services", href: "/services" },
     { name: "Solutions", href: "/solutions" },
     { name: "Portfolio", href: "/portfolio" },
+    { name: "Resources", href: "/resources" },
+    { name: "Careers", href: "/careers" },
     { name: "Blog", href: "/blog" },
   ];
 

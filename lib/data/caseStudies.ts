@@ -262,7 +262,7 @@ export const caseStudies: CaseStudyData[] = [
     metric: "Camera & Eye Gesture Device Control",
     metaTitle: "Gesture Smart Accessibility Case Study | Teebot",
     metaDescription: "How we built Gesture Smart, enabling eye wink camera navigation on Android with under 5% battery load.",
-    image: `${baseUrl}/gesture_smart.png`,
+    image: "/gesture_smart.png",
     clientBackground: "Gesture Smart develops accessibility software tools for motor-impaired mobile users.",
     businessProblem: "Standard touch screen interfaces lock out users with severe motor challenges.",
     research: "Wrote face mesh algorithms mapping winks and speech patterns to Android system navigation.",
@@ -412,8 +412,7 @@ export const caseStudies: CaseStudyData[] = [
       author: "Emily Watson",
       role: "Product Lead, Tendor"
     },
-    lessonsLearned: "Pruning unnecessary third-party packages reduced bundle size by 35%.",
-    deployedUrl: "https://apps.apple.com/lc/app/tendor-app/id6450906363"
+    lessonsLearned: "Pruning unnecessary third-party packages reduced bundle size by 35%."
   },
   {
     slug: "the-imagination",
@@ -445,7 +444,7 @@ export const caseStudies: CaseStudyData[] = [
       role: "Founder, The Imagination"
     },
     lessonsLearned: "Using Atlas serverless database clusters eliminated the need for complex database proxy configurations.",
-    deployedUrl: "https://the-imagination.vercel.app/"
+    deployedUrl: "https://www.imaginationpk.com"
   },
   {
     slug: "ib-tech",
@@ -572,8 +571,7 @@ export const caseStudies: CaseStudyData[] = [
       author: "Jordan Miller",
       role: "Operations Director, Miller Logistics"
     },
-    lessonsLearned: "Utilizing Redux Persist database allowed users to keep their data safe during offline periods.",
-    websiteUrl: "https://github.com/AteebNoOne/InvoiceManager"
+    lessonsLearned: "Utilizing Redux Persist database allowed users to keep their data safe during offline periods."
   },
   {
     slug: "flair-home",

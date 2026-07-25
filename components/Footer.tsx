@@ -138,6 +138,30 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/case-studies"
+                  className="text-zinc-400 hover:text-white transition-colors text-sm"
+                >
+                  Case Studies
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/resources"
+                  className="text-zinc-400 hover:text-white transition-colors text-sm"
+                >
+                  Resources
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/careers"
+                  className="text-zinc-400 hover:text-white transition-colors text-sm"
+                >
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contact"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >

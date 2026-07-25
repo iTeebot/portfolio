@@ -4,6 +4,7 @@ import { solutions } from "@/lib/data/solutions";
 import { constructMetadata } from "@/lib/seo";
 import { ArrowLeft, CheckCircle2, Cpu, HelpCircle } from "lucide-react";
 import JsonLd, { getFAQSchema } from "@/components/JsonLd";
+import RelatedProjects from "@/components/RelatedProjects";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -135,6 +136,8 @@ export default async function SolutionPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          <RelatedProjects currentSlug={sol.slug} type="solutions" />
         </div>
       </article>
     </>

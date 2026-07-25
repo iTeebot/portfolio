@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { getBlogPost, getBlogSlugs, getAllBlogPosts } from "@/lib/blog";
 import { constructMetadata } from "@/lib/seo";
-import { ArrowLeft, Calendar, User } from "lucide-react";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { ArrowLeft, Calendar, User, Clock, Volume2, Tag } from "lucide-react";
+import BlogInteractiveReader from "@/components/BlogInteractiveReader";
 import JsonLd, { getArticleSchema } from "@/components/JsonLd";
 
 interface Props {
@@ -25,10 +25,10 @@ export async function generateMetadata({ params }: Props) {
   if (!post) return {};
 
   return constructMetadata({
-    title: `${post.title} | Technical Blog | Teebot`,
+    title: post.seoTitle || `${post.title} | Technical Blog | Teebot`,
     description: post.description,
     image: post.image,
-    path: `/blog/${slug}`,
+    path: post.canonicalUrl ? new URL(post.canonicalUrl).pathname : `/blog/${slug}`,
   });
 }
 
@@ -42,6 +42,14 @@ export default async function BlogPostPage({ params }: Props) {
     .filter((p) => p.slug !== slug)
     .slice(0, 3);
 
+  const authorInitials = post.author
+    ? post.author
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+    : "AN";
+
   return (
     <>
       {/* Schema Injection */}
@@ -49,9 +57,10 @@ export default async function BlogPostPage({ params }: Props) {
         data={getArticleSchema({
           title: post.title,
           description: post.description,
-          url: `https://www.iteebot.com/blog/${post.slug}`,
+          url: post.canonicalUrl || `https://www.iteebot.com/blog/${post.slug}`,
           imageUrl: post.image,
           datePublished: post.date,
+          dateModified: post.lastModified || post.date,
           authorName: post.author,
         })}
       />
@@ -72,38 +81,61 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="lg:col-span-3">
               <div className="mb-8">
                 <span className="inline-block bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wider mb-4">
-                  Engineering Guide
+                  {post.category || "Engineering Guide"}
                 </span>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-zinc-900 dark:text-white leading-tight mb-4">
                   {post.title}
                 </h1>
-                <div className="flex items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     {post.date}
                   </span>
                   <span className="flex items-center gap-1">
                     <User className="w-4 h-4" />
-                    By {post.author}
+                    By {post.author} {post.authorRole ? `(${post.authorRole})` : ""}
                   </span>
+                  {post.readTime && (
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {post.readTime}
+                    </span>
+                  )}
                 </div>
               </div>
 
               {/* Banner Image */}
-              <div className="relative h-[20rem] sm:h-[30rem] w-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 mb-10">
+              <div className="relative h-[20rem] sm:h-[30rem] w-full rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 mb-8">
                 <Image
                   src={post.image}
-                  alt={post.title}
+                  alt={post.imageAlt || post.title}
                   fill
                   className="object-cover"
                   priority
                 />
               </div>
 
-              {/* Body */}
-              <div className="prose dark:prose-invert max-w-none">
-                <MarkdownRenderer content={post.content} />
-              </div>
+              {/* Tags */}
+              {post.tags && post.tags.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 mb-8">
+                  <Tag className="w-4 h-4 text-zinc-400" />
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-zinc-100 dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 px-3 py-1 rounded-full text-xs font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Synchronized Audio Player & Interactive Reader Body */}
+              <BlogInteractiveReader
+                slug={post.slug}
+                initialAudioUrl={post.audioUrl}
+                content={post.content}
+              />
             </div>
 
             {/* Sidebar (Author bio & Recommended articles) */}
@@ -112,19 +144,18 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
                 <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">About the Author</h3>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="relative w-12 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-700">
-                    {/* Placeholder image or initial */}
-                    <div className="absolute inset-0 flex items-center justify-center font-bold text-zinc-600 dark:text-zinc-400 text-sm">
-                      AN
+                  <div className="relative w-12 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-700 flex items-center justify-center">
+                    <div className="font-bold text-zinc-600 dark:text-zinc-400 text-sm">
+                      {authorInitials}
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-zinc-900 dark:text-white text-sm">Ateeb Noone</h4>
-                    <p className="text-zinc-500 text-xs">Founder, Teebot</p>
+                    <h4 className="font-semibold text-zinc-900 dark:text-white text-sm">{post.author}</h4>
+                    <p className="text-zinc-500 text-xs">{post.authorRole || "Software Architect"}</p>
                   </div>
                 </div>
                 <p className="text-zinc-600 dark:text-zinc-400 text-xs leading-relaxed">
-                  Ateeb is a software architect and system engineer building custom workflow automation and AI Agent integrations.
+                  Specializing in autonomous AI agent architecture, workflow automation systems, and high-performance enterprise integrations.
                 </p>
               </div>
 

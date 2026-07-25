@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "generate-audio": "npx tsx scripts/generate-audio.ts",
+    "build": "npm run generate-audio && next build",
     "start": "next start",
     "lint": "eslint",
+    "check-meta": "npx tsx scripts/check-meta.ts",
+    "check-meta:full": "npx tsx scripts/check-meta.ts --full",
     "check-updates": "npx npm-check-updates -u"
   },
   "dependencies": {

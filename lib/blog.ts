@@ -4,11 +4,22 @@ import path from "path";
 export interface BlogPost {
   slug: string;
   title: string;
+  seoTitle?: string;
   date: string;
+  lastModified?: string;
   description: string;
   author: string;
+  authorRole?: string;
   keywords: string[];
   image: string;
+  imageAlt?: string;
+  tags?: string[];
+  category?: string;
+  draft?: boolean;
+  featured?: boolean;
+  readTime?: string;
+  audioUrl?: string;
+  canonicalUrl?: string;
   content: string;
 }
 
@@ -79,6 +90,22 @@ function normalizeDateStr(dateStr: string): string {
   }
 }
 
+function parseArrayField(val: string | undefined): string[] {
+  if (!val) return [];
+  if (val.startsWith("[") && val.endsWith("]")) {
+    try {
+      return JSON.parse(val.replace(/'/g, '"'));
+    } catch {
+      return val
+        .slice(1, -1)
+        .split(",")
+        .map((s) => s.trim().replace(/^['"]|['"]$/g, ""))
+        .filter(Boolean);
+    }
+  }
+  return val.split(",").map((k) => k.trim().replace(/^['"]|['"]$/g, "")).filter(Boolean);
+}
+
 export function getBlogPost(slug: string): BlogPost | null {
   // Validate slug to prevent path traversal or invalid characters
   if (!slug || typeof slug !== "string" || !/^[a-zA-Z0-9-_]+$/.test(slug)) {
@@ -120,18 +147,28 @@ export function getBlogPost(slug: string): BlogPost | null {
       }
     });
 
-    const keywords = metadata.keywords
-      ? metadata.keywords.split(",").map((k) => k.trim())
-      : [];
+    const keywords = parseArrayField(metadata.keywords);
+    const tags = parseArrayField(metadata.tags);
 
     return {
       slug,
       title: metadata.title || slug.replace(/-/g, " "),
+      seoTitle: metadata.seoTitle,
       date: normalizeDateStr(metadata.date || new Date().toISOString().split("T")[0]),
+      lastModified: metadata.lastModified ? normalizeDateStr(metadata.lastModified) : undefined,
       description: metadata.description || "",
       author: metadata.author || "Teebot",
+      authorRole: metadata.authorRole,
       keywords,
+      tags: tags.length > 0 ? tags : undefined,
+      category: metadata.category,
+      draft: metadata.draft === "true",
+      featured: metadata.featured === "true",
+      readTime: metadata.readTime,
+      audioUrl: metadata.audioUrl,
+      canonicalUrl: metadata.canonicalUrl,
       image: metadata.image || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
+      imageAlt: metadata.imageAlt,
       content,
     };
   } catch (error) {
@@ -155,6 +192,7 @@ export function getAllBlogPosts(): BlogPost[] {
     .map((slug) => getBlogPost(slug))
     .filter((post): post is BlogPost => {
       if (post === null) return false;
+      if (post.draft) return false;
       // Exclude posts whose publication dates are in the future relative to PKT calendar day
       return post.date <= todayStr;
     });

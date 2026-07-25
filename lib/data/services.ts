@@ -23,7 +23,7 @@ export const services: ServiceData[] = [
     title: "AI Automation",
     category: "automation",
     metaTitle: "AI Automation Services | Deep Learning & Agent Workflows | Teebot",
-    metaDescription: "Supercharge your business with custom AI automation services. We integrate intelligent LLMs, design agentic workflows, and automate complex tasks with high precision.",
+    metaDescription: "Supercharge your business with custom AI automation services. We integrate intelligent LLMs, design agentic workflows, and automate tasks with high precision.",
     introduction: "AI Automation is transforming modern businesses by integrating cognitive decision-making capabilities into software. At Teebot, we build bespoke artificial intelligence solutions, leveraging state-of-the-art Large Language Models (LLMs) to automate tasks that previously required human intervention. From text extraction to smart categorization and autonomous problem solving, our systems are built to scale safely, securely, and with unparalleled speed.",
     businessBenefits: [
       { title: "90% Reduction in Processing Time", desc: "Automate repetitive data operations and make complex decisions in milliseconds rather than hours." },

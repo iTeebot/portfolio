@@ -89,26 +89,35 @@ export function getServiceSchema(
     "@context": "https://schema.org",
     "@type": "Service",
     "name": name,
-    "description": description,
+    "serviceType": name,
+    "description": description || "Bespoke technology consultancy and software development services.",
     "provider": {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "name": providerName,
-      "url": "https://www.iteebot.com"
+      "url": "https://www.iteebot.com",
+      "logo": "https://www.iteebot.com/logo.png"
     },
-    "url": url
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Worldwide"
+    },
+    "url": url.startsWith("http") ? url : `https://www.iteebot.com${url.startsWith("/") ? url : `/${url}`}`
   };
 }
 
 export function getFAQSchema(faqs: { question: string; answer: string }[]) {
+  const validFaqs = (faqs || []).filter(
+    (faq) => faq.question && faq.question.trim() !== "" && faq.answer && faq.answer.trim() !== ""
+  );
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
+    "mainEntity": validFaqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.question,
+      "name": faq.question.trim(),
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": faq.answer
+        "text": faq.answer.trim()
       }
     }))
   };
@@ -118,12 +127,17 @@ export function getBreadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": item.url
-    }))
+    "itemListElement": items.map((item, index) => {
+      const absoluteUrl = item.url.startsWith("http")
+        ? item.url
+        : `https://www.iteebot.com${item.url.startsWith("/") ? item.url : `/${item.url}`}`;
+      return {
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item.name,
+        "item": absoluteUrl
+      };
+    })
   };
 }
 
@@ -133,6 +147,7 @@ export function getArticleSchema({
   url,
   imageUrl,
   datePublished,
+  dateModified,
   authorName = "Ateeb Noone"
 }: {
   title: string;
@@ -140,6 +155,7 @@ export function getArticleSchema({
   url: string;
   imageUrl: string;
   datePublished: string;
+  dateModified?: string;
   authorName?: string;
 }) {
   return {
@@ -148,7 +164,7 @@ export function getArticleSchema({
     "headline": title,
     "image": [imageUrl],
     "datePublished": datePublished,
-    "dateModified": datePublished,
+    "dateModified": dateModified || datePublished,
     "author": {
       "@type": "Person",
       "name": authorName,

@@ -8,6 +8,7 @@ import { constructMetadata } from "@/lib/seo";
 import { ArrowLeft, ShieldCheck, Trophy, Sparkles, CheckCircle2, Globe, Github, Smartphone } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import PerformanceStats from "@/components/PerformanceStats";
+import RelatedProjects from "@/components/RelatedProjects";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -253,6 +254,8 @@ export default async function CaseStudyPage({ params }: Props) {
               <p className="text-zinc-500 text-sm">{study.clientFeedback.role}</p>
             </div>
           </div>
+
+          <RelatedProjects currentSlug={study.slug} type="case-studies" />
         </div>
       </article>
     </>

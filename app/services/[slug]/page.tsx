@@ -4,6 +4,7 @@ import { services } from "@/lib/data/services";
 import { constructMetadata } from "@/lib/seo";
 import { CheckCircle2, ChevronRight, HelpCircle, Calendar, DollarSign, ArrowLeft } from "lucide-react";
 import JsonLd, { getServiceSchema, getFAQSchema } from "@/components/JsonLd";
+import RelatedProjects from "@/components/RelatedProjects";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -218,30 +219,7 @@ export default async function ServicePage({ params }: Props) {
           )}
 
           {/* Related Services */}
-          {relatedServicesData.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-serif font-bold text-zinc-900 dark:text-white mb-8 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-                Related Services
-              </h2>
-              <div className="grid sm:grid-cols-3 gap-6">
-                {relatedServicesData.map((rel) => (
-                  <Link
-                    key={rel.slug}
-                    href={`/services/${rel.slug}`}
-                    className="p-5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-900 dark:hover:border-white transition-colors group flex justify-between items-center"
-                  >
-                    <div>
-                      <h4 className="font-bold text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                        {rel.title}
-                      </h4>
-                      <p className="text-zinc-500 text-xs mt-1 capitalize">{rel.category}</p>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
+          <RelatedProjects currentSlug={service.slug} type="services" />
         </div>
       </article>
     </>
