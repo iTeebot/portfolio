@@ -43,7 +43,7 @@ export default function Contact() {
         setStatus('error');
         setStatusMessage(data.error || 'Something went wrong. Please try again.');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setStatusMessage('Failed to send message. Please try again later.');
     }
@@ -83,7 +83,7 @@ export default function Contact() {
           </h2>
           <div className="w-16 sm:w-20 h-1 bg-zinc-900 dark:bg-white mb-6 sm:mb-8" />
           <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Ready to build the future together? Let's discuss how we can transform your ideas into reality.
+            Ready to build the future together? Let&apos;s discuss how we can transform your ideas into reality.
           </p>
         </motion.div>
 
@@ -141,7 +141,7 @@ export default function Contact() {
             {/* Additional Info */}
             <div>
               <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                Whether you're a startup or an established enterprise, we're excited to discuss
+                Whether you&apos;re a startup or an established enterprise, we&apos;re excited to discuss
                 new projects, partnerships, and innovative ideas.
               </p>
             </div>

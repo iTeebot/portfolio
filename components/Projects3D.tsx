@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
 import { Github, ExternalLink, Cpu, Code2, Receipt, ShoppingBag } from "lucide-react";
 
 interface Project {
@@ -17,6 +17,16 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: "tinyxml2-rs",
+    type: "Open Source Cargo Crate",
+    description: "A native Rust implementation of the TinyXML2 API. Provides memory-safe XML parsing and DOM generation with FFI compatibility, making it a drop-in safe Rust replacement in legacy C/C++ codebases.",
+    tags: ["Rust", "XML DOM", "FFI Compatibility", "Memory-Safe", "Zero Dependencies"],
+    logo: "/tinyxml2-rs.png",
+    github: "https://github.com/iTeebot/tinyxml2-rs",
+    details: "https://labs.iteebot.com/packages/tinyxml2-rs",
+    icon: <Cpu className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />,
+  },
   {
     title: "GestureSmart",
     type: "Open Source Mobile App",
@@ -34,7 +44,7 @@ const projects: Project[] = [
     tags: ["React", "Next.js", "AI Hooks", "SSE Streaming", "TypeScript"],
     logo: "/npm-ai-hooks.png",
     github: "https://github.com/iTeebot/npm-ai-hooks",
-    details: "https://labs.iteebot.com/npm-packages/npm-ai-hooks",
+    details: "https://labs.iteebot.com/packages/npm-ai-hooks",
     icon: <Code2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
   },
   {
@@ -207,7 +217,7 @@ export default function Projects3D() {
                     href={projects[activeProject].github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"
                   >
                     <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     Repository
@@ -217,7 +227,7 @@ export default function Projects3D() {
                   href={projects[activeProject].details}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors bg-white dark:bg-zinc-950"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors bg-white dark:bg-zinc-950"
                 >
                   <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   Visit Website
@@ -228,7 +238,7 @@ export default function Projects3D() {
         </div>
 
         {/* Navigation Indicator / Pagination dots */}
-        <div className="relative z-10 flex justify-center gap-2 pt-2">
+        <div className="relative z-10 flex justify-center gap-0 pt-2">
           {projects.map((_, index) => (
             <button
               key={index}
@@ -245,13 +255,17 @@ export default function Projects3D() {
                   });
                 }
               }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                activeProject === index 
-                  ? "w-6 bg-zinc-800 dark:bg-white" 
-                  : "w-1.5 bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400"
-              }`}
+              className="w-12 h-12 flex items-center justify-center group focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-full focus-visible:outline-none"
               aria-label={`Go to project ${index + 1}`}
-            />
+            >
+              <span
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeProject === index
+                    ? "w-6 bg-zinc-800 dark:bg-white"
+                    : "w-1.5 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-400"
+                }`}
+              />
+            </button>
           ))}
         </div>
 
@@ -264,7 +278,7 @@ interface ProjectWrapperProps {
   project: Project;
   index: number;
   totalProjects: number;
-  scrollYProgress: any;
+  scrollYProgress: MotionValue<number>;
   activeProject: number;
   onCardClick: (index: number) => void;
 }
@@ -409,10 +423,9 @@ function ProjectCard({ project, isActive, onClick }: { project: Project; isActiv
           src={project.logo}
           alt={project.title}
           fill
-          sizes="(max-w-7xl) 320px, 240px"
+          sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 320px"
           className="object-contain select-none"
-          priority
-          unoptimized
+          loading="lazy"
         />
       </div>
 

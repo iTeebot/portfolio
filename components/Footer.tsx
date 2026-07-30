@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Github, Linkedin, Facebook, Instagram, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -39,7 +40,7 @@ export default function Footer() {
         setStatus('error');
         setStatusMessage(data.error || 'Something went wrong.');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setStatusMessage('Failed to subscribe. Please try again.');
     }
@@ -120,28 +121,28 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#about"
+                <Link
+                  href="/about"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#divisions"
+                <Link
+                  href="/services"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >
-                  Divisions
-                </a>
+                  Services
+                </Link>
               </li>
               <li>
-                <a
-                  href="#contact"
+                <Link
+                  href="/contact"
                   className="text-zinc-400 hover:text-white transition-colors text-sm"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -225,22 +226,22 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-500 text-sm">
+          <p className="text-zinc-400 text-sm">
             © {currentYear} Teebot. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a
-              href="https://iteebot.com"
-              className="text-zinc-500 hover:text-white text-sm transition-colors"
+            <Link
+              href="/privacy"
+              className="text-zinc-400 hover:text-white text-sm transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="https://iteebot.com"
-              className="text-zinc-500 hover:text-white text-sm transition-colors"
+            </Link>
+            <Link
+              href="/terms"
+              className="text-zinc-400 hover:text-white text-sm transition-colors"
             >
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
