@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
-import { ArrowRight, Trophy } from "lucide-react";
+import { ArrowRight, Trophy, ExternalLink } from "lucide-react";
 import { constructMetadata } from "@/lib/seo";
 import { caseStudies } from "@/lib/data/caseStudies";
 import JsonLd from "@/components/JsonLd";
@@ -38,59 +38,123 @@ export default function CaseStudiesPage() {
 
           {/* Grid lists */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study) => (
-              <Link
-                key={study.slug}
-                href={`/case-studies/${study.slug}`}
-                className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-900 dark:hover:border-white transition-all duration-300 flex flex-col justify-between"
-              >
-                <div className="relative h-64 w-full bg-zinc-200 dark:bg-zinc-800">
-                  <SafeImage
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-102"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent" />
-                  <div className="absolute bottom-4 left-6">
-                    <span className="text-indigo-300 font-semibold text-xs uppercase tracking-wider block mb-1">
-                      {study.client}
-                    </span>
-                    <h3 className="text-xl font-bold text-white">
-                      {study.title}
-                    </h3>
-                  </div>
-                </div>
+            {caseStudies.map((study) => {
+              const isExternal = study.deployedUrl?.includes("labs.iteebot.com");
+              const targetUrl = study.deployedUrl || study.websiteUrl;
 
-                <div className="p-6 flex flex-col flex-grow justify-between">
-                  <div>
-                    <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800 text-xs font-semibold px-3 py-1 rounded-md mb-4">
-                      <Trophy className="w-3.5 h-3.5" />
-                      <span>{study.metric}</span>
+              if (isExternal && targetUrl) {
+                return (
+                  <a
+                    key={study.slug}
+                    href={targetUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-900 dark:hover:border-white transition-all duration-300 flex flex-col justify-between"
+                  >
+                    <div className="relative h-64 w-full bg-zinc-200 dark:bg-zinc-800">
+                      <SafeImage
+                        src={study.image}
+                        alt={study.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-102"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent" />
+                      <div className="absolute bottom-4 left-6">
+                        <span className="text-indigo-300 font-semibold text-xs uppercase tracking-wider block mb-1">
+                          {study.client}
+                        </span>
+                        <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                          {study.title}
+                          <ExternalLink className="w-4 h-4 opacity-75 group-hover:opacity-100 transition-opacity" />
+                        </h3>
+                      </div>
                     </div>
-                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
-                      {study.businessProblem}
-                    </p>
-                    <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4 mb-6">
-                      <h4 className="text-xs font-bold text-zinc-500 uppercase">Key Metrics</h4>
-                      <ul className="space-y-1">
-                        {study.metrics.map((metric, i) => (
-                          <li key={i} className="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5">
-                            <div className="w-1 h-1 bg-zinc-900 dark:bg-white rounded-full" />
-                            <span>{metric}</span>
-                          </li>
-                        ))}
-                      </ul>
+
+                    <div className="p-6 flex flex-col flex-grow justify-between">
+                      <div>
+                        <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800 text-xs font-semibold px-3 py-1 rounded-md mb-4">
+                          <Trophy className="w-3.5 h-3.5" />
+                          <span>{study.metric}</span>
+                        </div>
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
+                          {study.businessProblem}
+                        </p>
+                        <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4 mb-6">
+                          <h4 className="text-xs font-bold text-zinc-500 uppercase">Key Metrics</h4>
+                          <ul className="space-y-1">
+                            {study.metrics.map((metric, i) => (
+                              <li key={i} className="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5">
+                                <div className="w-1 h-1 bg-zinc-900 dark:bg-white rounded-full" />
+                                <span>{metric}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center text-sm font-semibold text-zinc-900 dark:text-white gap-1 group-hover:gap-2 transition-all mt-auto border-t border-zinc-200 dark:border-zinc-800 pt-4">
+                        <span>Visit Website</span>
+                        <ExternalLink className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                      </div>
+                    </div>
+                  </a>
+                );
+              }
+
+              return (
+                <Link
+                  key={study.slug}
+                  href={`/case-studies/${study.slug}`}
+                  className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-900 dark:hover:border-white transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="relative h-64 w-full bg-zinc-200 dark:bg-zinc-800">
+                    <SafeImage
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-102"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent" />
+                    <div className="absolute bottom-4 left-6">
+                      <span className="text-indigo-300 font-semibold text-xs uppercase tracking-wider block mb-1">
+                        {study.client}
+                      </span>
+                      <h3 className="text-xl font-bold text-white">
+                        {study.title}
+                      </h3>
                     </div>
                   </div>
 
-                  <div className="flex items-center text-sm font-semibold text-zinc-900 dark:text-white gap-1 group-hover:gap-2 transition-all mt-auto border-t border-zinc-200 dark:border-zinc-800 pt-4">
-                    <span>Read Full Case Study</span>
-                    <ArrowRight className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                  <div className="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                      <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800 text-xs font-semibold px-3 py-1 rounded-md mb-4">
+                        <Trophy className="w-3.5 h-3.5" />
+                        <span>{study.metric}</span>
+                      </div>
+                      <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
+                        {study.businessProblem}
+                      </p>
+                      <div className="space-y-2 border-t border-zinc-200 dark:border-zinc-800 pt-4 mb-6">
+                        <h4 className="text-xs font-bold text-zinc-500 uppercase">Key Metrics</h4>
+                        <ul className="space-y-1">
+                          {study.metrics.map((metric, i) => (
+                            <li key={i} className="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5">
+                              <div className="w-1 h-1 bg-zinc-900 dark:bg-white rounded-full" />
+                              <span>{metric}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center text-sm font-semibold text-zinc-900 dark:text-white gap-1 group-hover:gap-2 transition-all mt-auto border-t border-zinc-200 dark:border-zinc-800 pt-4">
+                      <span>Read Full Case Study</span>
+                      <ArrowRight className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

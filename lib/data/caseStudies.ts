@@ -639,5 +639,37 @@ export const caseStudies: CaseStudyData[] = [
     },
     lessonsLearned: "Statically compiling landing details minimized API database connection limits lag.",
     deployedUrl: "https://www.advenixsolutions.com/"
+  },
+  {
+    slug: "virlio",
+    title: "Virlio",
+    client: "AI Content & Meme Platform",
+    metric: "Sub-Second AI Caption Generation",
+    metaTitle: "Virlio AI Social Content Platform Case Study | Teebot",
+    metaDescription: "Learn how we engineered Virlio, an AI-powered meme & social content platform delivering sub-second caption generation and multi-stage moderation.",
+    image: "/virlio-banner.png",
+    clientBackground: "Virlio is an AI-powered social media and meme marketing platform designed for creators, startups, and enterprise brands.",
+    businessProblem: "Creating engaging, brand-safe viral content required significant design effort and manual caption copywriting.",
+    research: "Analyzed viral social trends and meme templates to engineer automated caption generation models and Wilson score ranking formulas.",
+    planning: "Engineered a Next.js platform with crowdsourced template libraries, multi-stage AI moderation, and verified business profiles.",
+    design: "Designed a high-converting, modern dark UI with real-time meme previewing and instant social sharing workflows.",
+    architecture: "Next.js 16 frontend with Server Components, TypeScript, and Tailwind CSS, connected to AI moderation microservices.",
+    implementation: "Developed the AI meme generator, crowdsourced template hub, automated hashtag extractor, and community leaderboard system.",
+    testing: "Conducted load testing under 10,000 concurrent template search queries and verified sub-second AI caption response times.",
+    deployment: "Deployed frontend on edge CDN infrastructure for instant global access and sub-second page rendering.",
+    results: "Delivered a scalable meme marketing engine with sub-second AI caption generation and multi-stage content safety moderation.",
+    metrics: [
+      "Sub-second AI caption generation latency achieved",
+      "Multi-stage AI moderation checks completed under 300ms",
+      "Over 10,000 crowdsourced meme templates indexed"
+    ],
+    roi: "Accelerated brand social content velocity by 5x while ensuring 100% brand safety compliance.",
+    clientFeedback: {
+      quote: "Virlio transformed how we handle meme marketing. The AI captions and brand safety moderation are top-tier.",
+      author: "Virlio Product Team",
+      role: "Growth & Product Lead, Virlio"
+    },
+    lessonsLearned: "Edge caching template metadata dramatically improved search latency for viral trending content.",
+    deployedUrl: "https://virlio.iteebot.com/"
   }
 ];

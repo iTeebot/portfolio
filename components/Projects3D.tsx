@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
-import { Github, ExternalLink, Cpu, Code2, Receipt, ShoppingBag } from "lucide-react";
+import { Github, ExternalLink, ArrowRight, Cpu, Code2, Receipt, ShoppingBag, Sparkles } from "lucide-react";
 
 interface Project {
   title: string;
@@ -67,6 +67,16 @@ const projects: Project[] = [
     details: "https://www.teezyon.com/",
     icon: <ShoppingBag className="w-5 h-5 text-amber-600 dark:text-amber-400" />,
   },
+  {
+    title: "Virlio",
+    type: "AI Meme & Social Content Platform",
+    description: "An AI-powered meme & social content platform helping businesses and creators generate branded memes, automated captions, crowdsourced templates, and multi-stage content moderation.",
+    tags: ["Next.js", "AI/ML", "Social Content", "TypeScript", "Tailwind CSS"],
+    logo: "/virlio.png",
+    github: "",
+    details: "/portfolio/virlio",
+    icon: <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400" />,
+  },
 ];
 
 export default function Projects3D() {
@@ -93,7 +103,11 @@ export default function Projects3D() {
 
   const handleCardClick = (index: number) => {
     if (activeProject === index) {
-      window.open(projects[index].details, "_blank");
+      if (projects[index].details.startsWith("http")) {
+        window.open(projects[index].details, "_blank");
+      } else {
+        window.location.href = projects[index].details;
+      }
     } else {
       // Scroll page to active card partition
       const N = projects.length;
@@ -110,7 +124,7 @@ export default function Projects3D() {
   };
 
   return (
-    <div ref={containerRef} className="relative h-[300vh] bg-zinc-50/50 dark:bg-zinc-950/50">
+    <div ref={containerRef} className="relative h-[350vh] bg-zinc-50/50 dark:bg-zinc-950/50">
       <div className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden py-16 sm:py-20">
         
         {/* Tilted 3D grid backgrounds */}
@@ -225,12 +239,21 @@ export default function Projects3D() {
                 )}
                 <a
                   href={projects[activeProject].details}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={projects[activeProject].details.startsWith("http") ? "_blank" : "_self"}
+                  rel={projects[activeProject].details.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors bg-white dark:bg-zinc-950"
                 >
-                  <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  Visit Website
+                  {projects[activeProject].details.startsWith("http") ? (
+                    <>
+                      <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      Visit Website
+                    </>
+                  ) : (
+                    <>
+                      <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      View Details
+                    </>
+                  )}
                 </a>
               </div>
             </motion.div>

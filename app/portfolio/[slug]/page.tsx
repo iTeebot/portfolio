@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
 import { portfolioItems } from "@/lib/data/portfolio";
