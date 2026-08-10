@@ -26,6 +26,7 @@ export interface PortfolioItem {
   playStoreUrl?: string;
   appStoreUrl?: string;
   isPrivate?: boolean;
+  isExternal?: boolean;
 }
 
 const baseUrl = "https://ateebnoone.iteebot.com";
@@ -690,6 +691,7 @@ export const portfolioItems: PortfolioItem[] = [
     faqs: [
       { question: "Does Virlio support multi-language generation?", answer: "Yes, Virlio supports content localization across 40+ countries and languages natively." }
     ],
-    deployedUrl: "https://virlio.iteebot.com/"
+    deployedUrl: "https://virlio.iteebot.com/",
+    isExternal: true
   }
 ];

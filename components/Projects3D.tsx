@@ -74,7 +74,7 @@ const projects: Project[] = [
     tags: ["Next.js", "AI/ML", "Social Content", "TypeScript", "Tailwind CSS"],
     logo: "/virlio.png",
     github: "",
-    details: "/portfolio/virlio",
+    details: "https://virlio.iteebot.com/",
     icon: <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400" />,
   },
 ];
@@ -104,7 +104,7 @@ export default function Projects3D() {
   const handleCardClick = (index: number) => {
     if (activeProject === index) {
       if (projects[index].details.startsWith("http")) {
-        window.open(projects[index].details, "_blank");
+        window.open(projects[index].details, "_blank", "noopener,noreferrer");
       } else {
         window.location.href = projects[index].details;
       }

@@ -39,7 +39,7 @@ export default function CaseStudiesPage() {
           {/* Grid lists */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study) => {
-              const isExternal = study.deployedUrl?.includes("labs.iteebot.com");
+              const isExternal = study.isExternal;
               const targetUrl = study.deployedUrl || study.websiteUrl;
 
               if (isExternal && targetUrl) {

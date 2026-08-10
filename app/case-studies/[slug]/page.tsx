@@ -37,6 +37,10 @@ export default async function CaseStudyPage({ params }: Props) {
   const study = caseStudies.find((s) => s.slug === slug);
   if (!study) notFound();
 
+  if (study.isExternal && (study.deployedUrl || study.websiteUrl)) {
+    redirect(study.deployedUrl || study.websiteUrl!);
+  }
+
   const portfolioItem = portfolioItems.find((p) => p.slug === slug);
   const fallbackPerformance = portfolioItem?.performance || { lcp: "1.2s", size: "320KB" };
 

@@ -39,7 +39,7 @@ export default function PortfolioPage() {
           {/* Grid lists */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item) => {
-              const isExternal = item.deployedUrl?.includes("labs.iteebot.com");
+              const isExternal = item.isExternal;
               const targetUrl = item.deployedUrl || item.websiteUrl;
 
               if (isExternal && targetUrl) {

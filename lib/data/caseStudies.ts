@@ -26,6 +26,7 @@ export interface CaseStudyData {
   playStoreUrl?: string;
   appStoreUrl?: string;
   isPrivate?: boolean;
+  isExternal?: boolean;
 }
 
 const baseUrl = "https://ateebnoone.iteebot.com";
@@ -670,6 +671,7 @@ export const caseStudies: CaseStudyData[] = [
       role: "Growth & Product Lead, Virlio"
     },
     lessonsLearned: "Edge caching template metadata dramatically improved search latency for viral trending content.",
-    deployedUrl: "https://virlio.iteebot.com/"
+    deployedUrl: "https://virlio.iteebot.com/",
+    isExternal: true
   }
 ];

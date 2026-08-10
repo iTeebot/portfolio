@@ -35,6 +35,10 @@ export default async function PortfolioItemPage({ params }: Props) {
   const item = portfolioItems.find((p) => p.slug === slug);
   if (!item) notFound();
 
+  if (item.isExternal && (item.deployedUrl || item.websiteUrl)) {
+    redirect(item.deployedUrl || item.websiteUrl!);
+  }
+
   return (
     <>
       {/* Schema Injection */}
