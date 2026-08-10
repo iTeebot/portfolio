@@ -693,5 +693,39 @@ export const portfolioItems: PortfolioItem[] = [
     ],
     deployedUrl: "https://virlio.iteebot.com/",
     isExternal: true
+  },
+  {
+    slug: "wooltogether",
+    title: "Wool Together",
+    client: "Handcrafted Crochet Brand",
+    metric: "Handcrafted Crochet E-Commerce Platform",
+    metaTitle: "Wool Together Handcrafted Crochet Portfolio | Teebot",
+    metaDescription: "Official website of Wool Together, an artisanal handcrafted crochet brand featuring custom woven designs and seamless online shopping.",
+    image: "/wooltogether-banner.png",
+    overview: "Wool Together provides handcrafted crochet creations, connecting artisans and customers through a custom e-commerce storefront for bespoke woven apparel and accessories.",
+    problem: "Artisanal crochet creators struggled to showcase complex custom patterns and manage bespoke orders efficiently.",
+    businessGoal: "Deliver a high-converting, visually rich storefront with custom ordering options and sub-second page loads.",
+    solution: "We engineered a modern Next.js storefront featuring dynamic product showcases, responsive gallery viewports, and automated order workflows.",
+    architecture: "Next.js App Router with TypeScript and Tailwind CSS, deploying on edge server CDNs.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "E-Commerce", "Node.js"],
+    screenshots: [],
+    developmentProcess: [
+      "Designed high-converting artisan product showcase cards",
+      "Integrated custom pattern and color specification order workflows",
+      "Optimized asset loading and mobile-first responsive layout structures"
+    ],
+    challenges: "Optimizing high-resolution imagery and custom product configuration states without slowing viewport rendering.",
+    results: "Streamlined bespoke artisan ordering and delivered sub-second page rendering for global customers.",
+    performance: { lcp: "0.8s", cls: "0.01", size: "250KB" },
+    lessonsLearned: "Pre-rendering product collections on edge servers significantly boosted search visibility and user conversion.",
+    relatedServices: [
+      { title: "Web Development", slug: "web-development" },
+      { title: "SaaS Development", slug: "saas-development" }
+    ],
+    faqs: [
+      { question: "Does Wool Together support custom orders?", answer: "Yes, customers can request customized yarn colors, sizes, and pattern specifications." }
+    ],
+    deployedUrl: "https://wooltogether.iteebot.com/",
+    isExternal: true
   }
 ];
