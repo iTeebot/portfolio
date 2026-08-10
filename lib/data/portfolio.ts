@@ -26,6 +26,7 @@ export interface PortfolioItem {
   playStoreUrl?: string;
   appStoreUrl?: string;
   isPrivate?: boolean;
+  isExternal?: boolean;
 }
 
 const baseUrl = "https://ateebnoone.iteebot.com";
@@ -658,5 +659,39 @@ export const portfolioItems: PortfolioItem[] = [
       { question: "Are marketing forms connected?", answer: "Yes, inquiries qualify and sync to their HubSpot database." }
     ],
     deployedUrl: "https://www.advenixsolutions.com/"
+  },
+  {
+    slug: "virlio",
+    title: "Virlio",
+    client: "AI Content & Meme Platform",
+    metric: "AI-Powered Meme & Social Content Platform",
+    metaTitle: "Virlio AI Meme & Content Platform Portfolio | Teebot",
+    metaDescription: "Official website of Virlio, an AI-powered meme & social content platform helping businesses and creators generate branded memes with AI.",
+    image: "/virlio-banner.png",
+    overview: "Virlio provides businesses and creators with an automated meme editor, crowdsourced template library, AI caption generator, and brand verification ecosystem to accelerate viral social media presence.",
+    problem: "Businesses and creators struggle with manual social media content creation, lacking brand safety guardrails and fast meme generation tools.",
+    businessGoal: "Accelerate viral organic social media presence with AI-assisted caption generation and verified brand profiles.",
+    solution: "We engineered a full-stack Next.js platform featuring sub-second AI caption generation, crowdsourced template discovery, and multi-layer AI moderation.",
+    architecture: "Next.js App Router with TypeScript and Tailwind CSS, deploying on edge server CDNs with AI model moderation APIs.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "AI/ML", "Node.js"],
+    screenshots: [],
+    developmentProcess: [
+      "Built multi-stage AI moderation guardrails for image and text feeds",
+      "Coded high-performance template discovery algorithms with Wilson score ranking",
+      "Integrated automated social media post copy and hashtag generator pipelines"
+    ],
+    challenges: "Achieving sub-second AI caption generation latency while processing multi-layer safety moderation.",
+    results: "Enabled thousands of creators and businesses to publish brand-safe viral content efficiently.",
+    performance: { lcp: "0.9s", cls: "0.01", size: "260KB" },
+    lessonsLearned: "Pre-rendering popular template categories significantly reduced AI inference costs and database queries.",
+    relatedServices: [
+      { title: "AI Automation", slug: "ai-automation" },
+      { title: "Web Development", slug: "web-development" }
+    ],
+    faqs: [
+      { question: "Does Virlio support multi-language generation?", answer: "Yes, Virlio supports content localization across 40+ countries and languages natively." }
+    ],
+    deployedUrl: "https://virlio.iteebot.com/",
+    isExternal: true
   }
 ];

@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
 import { portfolioItems } from "@/lib/data/portfolio";
@@ -34,6 +34,10 @@ export default async function PortfolioItemPage({ params }: Props) {
   const { slug } = await params;
   const item = portfolioItems.find((p) => p.slug === slug);
   if (!item) notFound();
+
+  if (item.isExternal && (item.deployedUrl || item.websiteUrl)) {
+    redirect(item.deployedUrl || item.websiteUrl!);
+  }
 
   return (
     <>
