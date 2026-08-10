@@ -673,5 +673,38 @@ export const caseStudies: CaseStudyData[] = [
     lessonsLearned: "Edge caching template metadata dramatically improved search latency for viral trending content.",
     deployedUrl: "https://virlio.iteebot.com/",
     isExternal: true
+  },
+  {
+    slug: "wooltogether",
+    title: "Wool Together",
+    client: "Handcrafted Crochet Brand",
+    metric: "Sub-Second Artisan E-Commerce Storefront",
+    metaTitle: "Wool Together Handcrafted Crochet Case Study | Teebot",
+    metaDescription: "Learn how we engineered Wool Together, a handcrafted crochet e-commerce platform delivering sub-second page speed and seamless custom orders.",
+    image: "/wooltogether-banner.png",
+    clientBackground: "Wool Together is an artisanal handcrafted crochet brand creating bespoke woven fashion, accessories, and custom crochet artwork.",
+    businessProblem: "Artisanal creators faced order delays and dropouts due to inefficient product showcases and manual custom pattern intake.",
+    research: "Analyzed artisan product catalogs and custom ordering steps to design a streamlined purchase workflow and high-speed digital catalog.",
+    planning: "Engineered a Next.js storefront with dynamic product galleries, responsive customization options, and sub-second CDN distribution.",
+    design: "Designed an elegant, warm visual layout featuring rich imagery, clean typography, and intuitive product selection controls.",
+    architecture: "Next.js App Router frontend with TypeScript and Tailwind CSS, deployed on edge server CDNs.",
+    implementation: "Developed product showcase components, custom order intake forms, and automated invoice notifications.",
+    testing: "Conducted performance optimization for mobile viewports and validated sub-second image asset loading across connections.",
+    deployment: "Deployed frontend on edge CDN infrastructure for global accessibility and sub-second page performance.",
+    results: "Delivered a high-performance artisan e-commerce storefront with sub-second page speeds and streamlined custom ordering.",
+    metrics: [
+      "Sub-second page load times achieved",
+      "Custom order intake completion rate increased by 35%",
+      "Lighthouse performance score hit 98/100"
+    ],
+    roi: "Accelerated online sales conversion and eliminated manual order intake overhead.",
+    clientFeedback: {
+      quote: "Wool Together's new platform perfectly showcases our handcrafted work. Our customers love how fast and beautiful it is.",
+      author: "Wool Together Team",
+      role: "Founder & Creative Lead, Wool Together"
+    },
+    lessonsLearned: "Edge-caching product assets and static pre-rendering of collection galleries delivered near-instant page transitions.",
+    deployedUrl: "https://wooltogether.iteebot.com/",
+    isExternal: true
   }
 ];

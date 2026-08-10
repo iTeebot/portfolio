@@ -11,6 +11,25 @@ export const metadata = constructMetadata({
   path: "/portfolio",
 });
 
+function getBannerStyles(slug: string) {
+  if (slug === "virlio") {
+    return {
+      container: "relative h-64 w-full bg-zinc-900 overflow-hidden",
+      image: "object-cover object-top transition-transform duration-500 group-hover:scale-102",
+    };
+  }
+  if (slug === "wooltogether") {
+    return {
+      container: "relative h-64 w-full bg-[#FAF6F0] dark:bg-zinc-900 overflow-hidden",
+      image: "object-contain transition-transform duration-500 group-hover:scale-102",
+    };
+  }
+  return {
+    container: "relative h-64 w-full bg-zinc-200 dark:bg-zinc-800",
+    image: "object-cover transition-transform duration-500 group-hover:scale-102",
+  };
+}
+
 export default function PortfolioPage() {
   return (
     <>
@@ -41,6 +60,7 @@ export default function PortfolioPage() {
             {portfolioItems.map((item) => {
               const isExternal = item.isExternal;
               const targetUrl = item.deployedUrl || item.websiteUrl;
+              const bannerStyles = getBannerStyles(item.slug);
 
               if (isExternal && targetUrl) {
                 return (
@@ -51,14 +71,15 @@ export default function PortfolioPage() {
                     rel="noopener noreferrer"
                     className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-900 dark:hover:border-white transition-all duration-300 flex flex-col justify-between"
                   >
-                    <div className="relative h-64 w-full bg-zinc-200 dark:bg-zinc-800">
+                    <div className={bannerStyles.container}>
                       <SafeImage
                         src={item.image}
                         alt={item.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-102"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className={bannerStyles.image}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent pointer-events-none" />
                       <div className="absolute bottom-4 left-6">
                         <span className="text-indigo-300 font-semibold text-xs uppercase tracking-wider block mb-1">
                           {item.client}
@@ -105,14 +126,15 @@ export default function PortfolioPage() {
                   href={`/portfolio/${item.slug}`}
                   className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:border-zinc-900 dark:hover:border-white transition-all duration-300 flex flex-col justify-between"
                 >
-                  <div className="relative h-64 w-full bg-zinc-200 dark:bg-zinc-800">
+                  <div className={bannerStyles.container}>
                     <SafeImage
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-102"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className={bannerStyles.image}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent pointer-events-none" />
                     <div className="absolute bottom-4 left-6">
                       <span className="text-indigo-300 font-semibold text-xs uppercase tracking-wider block mb-1">
                         {item.client}

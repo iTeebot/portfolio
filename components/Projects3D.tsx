@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
-import { Github, ExternalLink, ArrowRight, Cpu, Code2, Receipt, ShoppingBag, Sparkles } from "lucide-react";
+import { Github, ExternalLink, ArrowRight, Cpu, Code2, Receipt, ShoppingBag, Sparkles, Heart } from "lucide-react";
 
 interface Project {
   title: string;
@@ -72,10 +72,20 @@ const projects: Project[] = [
     type: "AI Meme & Social Content Platform",
     description: "An AI-powered meme & social content platform helping businesses and creators generate branded memes, automated captions, crowdsourced templates, and multi-stage content moderation.",
     tags: ["Next.js", "AI/ML", "Social Content", "TypeScript", "Tailwind CSS"],
-    logo: "/virlio.png",
+    logo: "/virlio-banner.png",
     github: "",
     details: "https://virlio.iteebot.com/",
     icon: <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400" />,
+  },
+  {
+    title: "Wool Together",
+    type: "Handcrafted Crochet E-Commerce",
+    description: "An artisanal e-commerce platform for handcrafted crochet creations, featuring custom woven designs, order customization, and seamless online shopping.",
+    tags: ["Next.js", "E-Commerce", "Handcrafted Crochet", "TypeScript", "Tailwind CSS"],
+    logo: "/wooltogether-banner.png",
+    github: "",
+    details: "https://wooltogether.iteebot.com/",
+    icon: <Heart className="w-5 h-5 text-rose-600 dark:text-rose-400" />,
   },
 ];
 
@@ -447,7 +457,13 @@ function ProjectCard({ project, isActive, onClick }: { project: Project; isActiv
           alt={project.title}
           fill
           sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 320px"
-          className="object-contain select-none"
+          className={
+            project.logo.includes("virlio-banner")
+              ? "object-cover object-top rounded-2xl select-none"
+              : project.logo.includes("wooltogether-banner")
+              ? "object-contain bg-[#FAF6F0] dark:bg-zinc-900 rounded-2xl select-none"
+              : "object-contain select-none"
+          }
           loading="lazy"
         />
       </div>
