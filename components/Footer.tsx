@@ -224,24 +224,62 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-400 text-sm">
-            © {currentYear} Teebot. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="text-zinc-400 hover:text-white text-sm transition-colors"
+        {/* Bottom Bar with Divider Line */}
+        <div className="pt-8 border-t border-zinc-800 flex flex-col items-center gap-6">
+          {/* Trustpilot Widget — Centered below line */}
+          <a
+            href="https://www.trustpilot.com/review/iteebot.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-4 py-2 bg-zinc-800/80 hover:bg-zinc-800 border border-zinc-700/80 hover:border-zinc-600 rounded-md transition-all duration-300"
+            aria-label="Read our Trustpilot reviews"
+          >
+            {/* Trustpilot star icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="w-5 h-5 flex-shrink-0"
+              fill="none"
             >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-zinc-400 hover:text-white text-sm transition-colors"
-            >
-              Terms of Service
-            </Link>
+              <rect width="24" height="24" fill="#00B67A" rx="2" />
+              <path
+                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                fill="#ffffff"
+              />
+            </svg>
+
+            <div className="flex flex-col">
+              <span className="text-white text-xs font-semibold tracking-wide leading-none">Trustpilot</span>
+              {/* 5 green stars */}
+              <div className="flex gap-0.5 mt-1">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-3 h-3" viewBox="0 0 24 24" fill="#00B67A">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </a>
+
+          {/* Copyright & Links */}
+          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-zinc-400 text-sm">
+              © {currentYear} Teebot. All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <Link
+                href="/privacy"
+                className="text-zinc-400 hover:text-white text-sm transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-zinc-400 hover:text-white text-sm transition-colors"
+              >
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>

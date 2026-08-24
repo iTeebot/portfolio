@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check-updates": "npx npm-check-updates -u"
+    "check-updates": "npx npm-check-updates -u",
+    "postinstall": "node -e \"const fs=require('fs'),p=require('path');['node_modules/@splinetool/runtime/libs/draco/draco_decoder.js','node_modules/@splinetool/runtime/libs/draco/draco_decoder.wasm','node_modules/@splinetool/runtime/libs/draco/draco_wasm_wrapper.js','node_modules/@splinetool/runtime/libs/draco/gltf/draco_decoder.wasm','node_modules/@splinetool/runtime/libs/draco/gltf/draco_wasm_wrapper.js','node_modules/@splinetool/runtime/build/boolean_wasm_bg.wasm'].forEach(f=>{fs.mkdirSync(p.dirname(f),{recursive:true});if(!fs.existsSync(f))fs.writeFileSync(f,'');})\""
   },
   "dependencies": {
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^2.0.5",
     "@types/nodemailer": "^8.0.0",
     "framer-motion": "^12.40.0",
     "lucide-react": "^0.546.0",
