@@ -2,6 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const SplineScene = dynamic(() => import("@/components/SplineScene"), {
+  ssr: false,
+});
 
 export default function Hero() {
   const containerVariants = {
@@ -36,14 +41,19 @@ export default function Hero() {
       id="hero"
       className="min-h-[100dvh] flex items-center justify-center relative overflow-hidden bg-white dark:bg-zinc-950 pt-20"
     >
+      {/* 3D Spline Robot Background Scene */}
+      <div className="absolute inset-0 z-0 pointer-events-none w-full h-full overflow-hidden">
+        <SplineScene />
+      </div>
+
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none"></div>
       
       {/* Radial gradient overlay for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,102,204,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(59,158,255,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,102,204,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(59,158,255,0.1),transparent_50%)] pointer-events-none"></div>
 
       <motion.div
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 md:py-32 relative z-10 w-full"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 md:py-32 relative z-10 w-full pointer-events-none"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -92,7 +102,7 @@ export default function Hero() {
           {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 md:mb-16"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 md:mb-16 pointer-events-auto"
           >
             <motion.button
               onClick={scrollToContact}

@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["@splinetool/runtime", "@splinetool/react-spline"],
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],
   },

@@ -128,3 +128,40 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+/* ============================================================
+   Remove Spline "Built with Spline" watermark & floating badge
+   Spline injects a fixed-position <a> or <div> into <body>.
+   Their logo is a green star visually identical to Trustpilot.
+   ============================================================ */
+a[href*="spline.design"],
+a[href*="spline"],
+a[href="https://spline.design"],
+#spline-watermark,
+.spline-watermark,
+[class*="spline-watermark"],
+[id*="spline-watermark"],
+[data-spline],
+[data-spline-watermark] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ============================================================
+   Force hide any dynamically injected Trustpilot floating widgets 
+   (e.g., from Google Tag Manager)
+   ============================================================ */
+iframe[src*="trustpilot"],
+iframe[title*="Trustpilot"],
+.trustpilot-widget,
+div[id*="trustpilot"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
