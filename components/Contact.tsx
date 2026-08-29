@@ -8,7 +8,7 @@ import { Mail, MapPin, Send } from "lucide-react";
 
 export default function Contact() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "200px" });
   
   const [formData, setFormData] = useState({
     name: '',
@@ -154,9 +154,10 @@ export default function Contact() {
             animate={isInView ? "visible" : "hidden"}
             variants={itemVariants}
             className="lg:col-span-3 space-y-6"
+            suppressHydrationWarning
           >
             <div className="grid md:grid-cols-2 gap-6">
-              <div>
+              <div suppressHydrationWarning>
                 <label htmlFor="name" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
                   Name *
                 </label>
@@ -167,12 +168,14 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  autoComplete="name"
+                  suppressHydrationWarning
                   className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:border-zinc-900 dark:focus:border-white focus:outline-none transition-colors"
                   placeholder="Your name"
                 />
               </div>
 
-              <div>
+              <div suppressHydrationWarning>
                 <label htmlFor="email" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
                   Email *
                 </label>
@@ -183,13 +186,15 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  autoComplete="email"
+                  suppressHydrationWarning
                   className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:border-zinc-900 dark:focus:border-white focus:outline-none transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
             </div>
 
-            <div>
+            <div suppressHydrationWarning>
               <label htmlFor="message" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
                 Message *
               </label>
@@ -199,6 +204,7 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                suppressHydrationWarning
                 rows={6}
                 className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white focus:border-zinc-900 dark:focus:border-white focus:outline-none transition-colors resize-none"
                 placeholder="Tell us about your project..."

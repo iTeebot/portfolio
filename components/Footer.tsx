@@ -56,13 +56,15 @@ export default function Footer() {
             <p className="text-zinc-400 mb-6">
               Subscribe to our newsletter for the latest updates, insights, and innovations from Teebot.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3" suppressHydrationWarning>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required
+                autoComplete="email"
+                suppressHydrationWarning
                 className="flex-1 px-4 py-3 bg-zinc-800 dark:bg-zinc-900 border border-zinc-700 dark:border-zinc-800 text-white placeholder-zinc-500 focus:border-white focus:outline-none transition-colors"
                 disabled={status === 'loading'}
               />

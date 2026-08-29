@@ -197,13 +197,13 @@ export default function Projects3D() {
 
         {/* Active Project Details Description */}
         <div className="relative z-10 max-w-3xl mx-auto px-4 w-full h-[190px] sm:h-[170px] flex flex-col justify-start text-center">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={activeProject}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               className="space-y-4 flex flex-col items-center"
             >
               <div>
@@ -384,6 +384,7 @@ function Project3DWrapper({
         opacity,
         scale,
         transformStyle: "preserve-3d",
+        willChange: "transform, opacity",
       }}
       className="absolute w-[240px] sm:w-[300px] md:w-[320px] aspect-[3/4]"
     >
@@ -437,6 +438,7 @@ function ProjectCard({ project, isActive, onClick }: { project: Project; isActiv
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{
         transformStyle: "preserve-3d",
+        willChange: "transform",
       }}
       className={`relative w-full h-full flex flex-col items-center justify-center transition-all duration-500 cursor-pointer ${
         isActive 
@@ -458,7 +460,7 @@ function ProjectCard({ project, isActive, onClick }: { project: Project; isActiv
           fill
           sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, 320px"
           className="object-contain select-none"
-          loading="lazy"
+          priority
         />
       </div>
 

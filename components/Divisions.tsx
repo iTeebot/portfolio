@@ -70,7 +70,7 @@ const divisions = [
 
 export default function Divisions() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "200px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },

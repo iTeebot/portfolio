@@ -1,15 +1,82 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Component, type ReactNode } from "react";
 import Spline from "@splinetool/react-spline";
 
 const SPLINE_SCENE = "https://prod.spline.design/GEMQ6RSqvNA3853T/scene.splinecode";
 
+interface SplineAppObject {
+  name?: string;
+  visible?: boolean;
+  children?: SplineAppObject[];
+  [key: string]: unknown;
+}
+
+interface SplineAppInstance {
+  _canvas?: HTMLCanvasElement;
+  _renderer?: {
+    pipeline?: { setWatermark?: (val: unknown) => void };
+    setWatermark?: (val: unknown) => void;
+    domElement?: HTMLElement & { _splineWatermark?: { remove?: () => void } };
+  };
+  _scene?: {
+    children?: SplineAppObject[];
+  };
+  findObjectByName?: (name: string) => SplineAppObject | undefined;
+}
+
+interface ErrorBoundaryProps {
+  fallback: ReactNode;
+  onError?: () => void;
+  children: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+class SplineErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error) {
+    console.warn("Spline WebGL failed to initialize:", error?.message || error);
+    this.props.onError?.();
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
+function isWebGLAvailable(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    const gl =
+      canvas.getContext("webgl2") ||
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl");
+    return Boolean(gl);
+  } catch {
+    return false;
+  }
+}
+
 /** Spline injects a fixed-position "Built with Spline" badge into document.body.
- *  Their logo is a green star almost identical to Trustpilot's.
- *  We nuke it using every known selector + periodic polling as a fallback. */
+ *  We remove it using every known selector + periodic polling as a fallback. */
 function purgeSplineBadges() {
-  // All known Spline watermark selectors
+  if (typeof document === "undefined") return;
+
   const selectors = [
     'a[href*="spline.design"]',
     'a[href*="spline"]',
@@ -21,7 +88,6 @@ function purgeSplineBadges() {
   ];
   document.querySelectorAll(selectors.join(",")).forEach((el) => el.remove());
 
-  // Also catch any <a> whose visible text mentions "spline" or "built with"
   document.querySelectorAll("a").forEach((a) => {
     const href = a.getAttribute("href") ?? "";
     const text = (a.textContent ?? "").toLowerCase();
@@ -30,7 +96,6 @@ function purgeSplineBadges() {
     }
   });
 
-  // Nuke any fixed-position div that contains only one child anchor pointing to spline
   document.querySelectorAll("div").forEach((div) => {
     const style = window.getComputedStyle(div);
     if (style.position === "fixed" || style.position === "absolute") {
@@ -44,9 +109,6 @@ function purgeSplineBadges() {
 
 /**
  * Attaches capture-phase wheel/touch interceptors to a canvas element.
- * CSS pointer-events:none does NOT stop wheel/touch events — only click-based
- * events. We must intercept at the capture phase to prevent Spline from
- * swallowing scroll and pass it up to the document.
  */
 function disableCanvasScrollInterception(canvas: HTMLCanvasElement) {
   const wheelHandler = (e: WheelEvent) => {
@@ -92,10 +154,13 @@ function LoadingScreen() {
 export default function SplineScene() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isSupported] = useState<boolean>(() => isWebGLAvailable());
   const containerRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void)[]>([]);
 
   useEffect(() => {
+    if (!isSupported) return;
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -106,10 +171,8 @@ export default function SplineScene() {
       cleanupRef.current.push(cleanup);
     };
 
-    // Patch already-present canvases
     container.querySelectorAll<HTMLCanvasElement>("canvas").forEach(patchCanvas);
 
-    // MutationObserver: watch whole document for Spline badge injection
     const observer = new MutationObserver(() => {
       container.querySelectorAll<HTMLCanvasElement>("canvas").forEach(patchCanvas);
       purgeSplineBadges();
@@ -117,9 +180,7 @@ export default function SplineScene() {
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // Polling fallback — Spline sometimes delays badge injection past mutation events
     const pollInterval = setInterval(purgeSplineBadges, 500);
-    // Stop polling after 15 seconds (scene is fully loaded by then)
     const stopPoll = setTimeout(() => clearInterval(pollInterval), 15_000);
 
     return () => {
@@ -129,7 +190,11 @@ export default function SplineScene() {
       cleanupRef.current.forEach((fn) => fn());
       cleanupRef.current = [];
     };
-  }, []);
+  }, [isSupported]);
+
+  if (isSupported === false || hasError) {
+    return null;
+  }
 
   return (
     <div
@@ -137,62 +202,58 @@ export default function SplineScene() {
       className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
       style={{ isolation: "isolate" }}
     >
-      {!isLoaded && !hasError && <LoadingScreen />}
+      {!isLoaded && !hasError && isSupported && <LoadingScreen />}
 
-      {hasError ? (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <p className="text-zinc-600 dark:text-zinc-500 text-xs tracking-widest uppercase">
-            3D Unavailable
-          </p>
-        </div>
-      ) : (
-        <div
-          className={`w-full h-full transition-opacity duration-1000 ${
-            isLoaded ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ pointerEvents: "none", width: "100%", height: "100%" }}
-        >
-          <Spline
-            scene={SPLINE_SCENE}
-            style={{ width: "100%", height: "100%", pointerEvents: "none" }}
-            onLoad={(splineApp: any) => {
-              setIsLoaded(true);
-              try {
-                // Kill pointer events on Spline's canvas
-                if (splineApp?._canvas) {
-                  const c = splineApp._canvas as HTMLCanvasElement;
-                  c.style.pointerEvents = "none";
-                  c.style.touchAction = "none";
-                  const cleanup = disableCanvasScrollInterception(c);
-                  cleanupRef.current.push(cleanup);
-                }
-                // Remove WebGL watermark via runtime API (all known paths)
-                const renderer = splineApp?._renderer;
-                renderer?.pipeline?.setWatermark?.(null);
-                renderer?.setWatermark?.(null);
-                if (renderer?.domElement) {
-                  // Also null out any watermark property directly
-                  try { renderer.domElement._splineWatermark?.remove?.(); } catch {}
-                }
-                // Run badge purge immediately after load
-                purgeSplineBadges();
-
-                // Hide logo/NEXBOT text
-                const logoObj = splineApp.findObjectByName?.("logo");
-                if (logoObj) logoObj.visible = false;
-                const traverse = (obj: any) => {
-                  if (obj?.name?.toLowerCase() === "logo") obj.visible = false;
-                  obj?.children?.forEach(traverse);
-                };
-                splineApp?._scene?.children?.forEach(traverse);
-              } catch (e) {
-                console.warn("Spline cleanup:", e);
-              }
-            }}
+      <div
+        className={`w-full h-full transition-opacity duration-1000 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ pointerEvents: "none", width: "100%", height: "100%" }}
+      >
+        {isSupported && (
+          <SplineErrorBoundary
+            fallback={null}
             onError={() => setHasError(true)}
-          />
-        </div>
-      )}
+          >
+            <Spline
+              scene={SPLINE_SCENE}
+              style={{ width: "100%", height: "100%", pointerEvents: "none" }}
+              onLoad={(splineApp: SplineAppInstance) => {
+                setIsLoaded(true);
+                try {
+                  if (splineApp?._canvas) {
+                    const c = splineApp._canvas;
+                    c.style.pointerEvents = "none";
+                    c.style.touchAction = "none";
+                    const cleanup = disableCanvasScrollInterception(c);
+                    cleanupRef.current.push(cleanup);
+                  }
+                  const renderer = splineApp?._renderer;
+                  renderer?.pipeline?.setWatermark?.(null);
+                  renderer?.setWatermark?.(null);
+                  if (renderer?.domElement) {
+                    try {
+                      renderer.domElement._splineWatermark?.remove?.();
+                    } catch {}
+                  }
+                  purgeSplineBadges();
+
+                  const logoObj = splineApp.findObjectByName?.("logo");
+                  if (logoObj) logoObj.visible = false;
+                  const traverse = (obj?: SplineAppObject) => {
+                    if (obj?.name?.toLowerCase() === "logo") obj.visible = false;
+                    obj?.children?.forEach(traverse);
+                  };
+                  splineApp?._scene?.children?.forEach(traverse);
+                } catch (e) {
+                  console.warn("Spline cleanup:", e);
+                }
+              }}
+              onError={() => setHasError(true)}
+            />
+          </SplineErrorBoundary>
+        )}
+      </div>
     </div>
   );
 }

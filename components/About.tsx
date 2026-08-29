@@ -7,7 +7,7 @@ import { Target, Eye, Zap } from "lucide-react";
 
 export default function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "200px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
